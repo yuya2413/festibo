@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  festival: one
+  room: one
+  plan: one
+  start_date: 2019-09-13
+  end_date: 2019-09-13
+  total_charge: 1
+
+two:
+  user: two
+  festival: two
+  room: two
+  plan: two
+  start_date: 2019-09-13
+  end_date: 2019-09-13
+  total_charge: 1

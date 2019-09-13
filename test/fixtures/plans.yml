@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  room_type: one
+  charge: 1
+  start_date: 2019-09-13
+
+two:
+  room_type: two
+  charge: 1
+  start_date: 2019-09-13

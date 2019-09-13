@@ -1,57 +1,32 @@
 Rails.application.routes.draw do
-  namespace :admins do
-    get 'reservation_histories/show'
-  end
-  namespace :admins do
-    get 'reservations/index'
-    get 'reservations/show'
-  end
-  namespace :admins do
-    get 'hotels/index'
-    get 'hotels/show'
-    get 'hotels/new'
-    get 'hotels/edit'
-  end
-  namespace :admins do
-    get 'festivals/index'
-    get 'festivals/show'
-    get 'festivals/new'
-    get 'festivals/edit'
-  end
-  namespace :admins do
-    get 'users/index'
-    get 'users/show'
-  end
-  namespace :admins do
-    get 'admins/top'
-  end
-  namespace :users do
-    get 'reviews/new'
-  end
-  namespace :users do
-    get 'reservation_histories/show'
-  end
-  namespace :users do
-    get 'reservations/complete'
-    get 'reservations/show'
-    get 'reservations/edit'
-  end
-  namespace :users do
-    get 'festivals/top'
-    get 'festivals/about'
-    get 'festivals/index'
-    get 'festivals/show'
-  end
-  namespace :users do
-    get 'users/edit'
-    get 'users/show'
-    get 'users/withdraw'
-  end
-  namespace :users do
-    get 'hotels/index'
-    get 'hotels/show'
-  end
+  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   devise_for :admins
   devise_for :users
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  root to: 'users/festivals#top'
+  get 'about', to: 'users/festivals#about'
+
+  namespace :users do
+  	resources :users, only:[:edit, :update, :show] do
+  		get 'withdraw', to: 'users#withdraw', as: 'withdraw'
+        patch 'withdraw', to: 'users#quit', as: 'quit'
+  		resources :reservations, except:[:new, :index]
+  	    get 'reservations/:id/thanks', to: 'reservations#complete', as: 'reservation_complete'
+    end
+    resources :festivals, only:[:index, :show]
+    resource :favorites, only:[:create, :destroy]
+    resources :hotels, only:[:index, :show]
+    resources :reservation_histories, only:[:show]
+    resources :reviews, only:[:new, :create, :destroy]
+  end
+
+  namespace :admins do
+  	get '', to: 'admins#top', as: 'admins'
+  	resources :users, only:[:index, :show]
+  	patch 'users/:id', to: 'users#quit', as: 'user_quit'
+    resources :festivals
+    resources :reviews, only:[:destroy]
+    resources :hotels
+    resources :reservations, only:[:index, :show]
+    resources :reservation_histories, only:[:show]
+  end
 end

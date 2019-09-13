@@ -1,0 +1,29 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  prefecture: one
+  category: one
+  name: MyString
+  detail: MyText
+  location: MyString
+  start_date: 2019-09-13
+  end_date: 2019-09-13
+  value_1: 1
+  value_2: 1
+  value_3: 1
+  value_4: 1
+  value_5: 1
+
+two:
+  prefecture: two
+  category: two
+  name: MyString
+  detail: MyText
+  location: MyString
+  start_date: 2019-09-13
+  end_date: 2019-09-13
+  value_1: 1
+  value_2: 1
+  value_3: 1
+  value_4: 1
+  value_5: 1

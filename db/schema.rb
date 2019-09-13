@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_13_104805) do
+ActiveRecord::Schema.define(version: 2019_09_13_160856) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -30,14 +30,14 @@ ActiveRecord::Schema.define(version: 2019_09_13_104805) do
   end
 
   create_table "categories", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "favorites", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "festival_id"
+    t.integer "user_id", null: false
+    t.integer "festival_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["festival_id"], name: "index_favorites_on_festival_id"
@@ -45,26 +45,26 @@ ActiveRecord::Schema.define(version: 2019_09_13_104805) do
   end
 
   create_table "festival_photos", force: :cascade do |t|
-    t.integer "festival_id"
-    t.string "image_id"
+    t.integer "festival_id", null: false
+    t.string "image_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["festival_id"], name: "index_festival_photos_on_festival_id"
   end
 
   create_table "festivals", force: :cascade do |t|
-    t.integer "prefecture_id"
-    t.integer "category_id"
-    t.string "name"
+    t.integer "prefecture_id", null: false
+    t.integer "category_id", null: false
+    t.string "name", null: false
     t.text "detail"
-    t.string "location"
-    t.date "start_date"
-    t.date "end_date"
-    t.integer "value_1"
-    t.integer "value_2"
-    t.integer "value_3"
-    t.integer "value_4"
-    t.integer "value_5"
+    t.string "location", null: false
+    t.date "start_date", null: false
+    t.date "end_date", null: false
+    t.integer "value_1", default: 2, null: false
+    t.integer "value_2", default: 2, null: false
+    t.integer "value_3", default: 2, null: false
+    t.integer "value_4", default: 2, null: false
+    t.integer "value_5", default: 2, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["category_id"], name: "index_festivals_on_category_id"
@@ -72,47 +72,47 @@ ActiveRecord::Schema.define(version: 2019_09_13_104805) do
   end
 
   create_table "hotel_photos", force: :cascade do |t|
-    t.integer "hotel_id"
-    t.string "image_id"
+    t.integer "hotel_id", null: false
+    t.string "image_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["hotel_id"], name: "index_hotel_photos_on_hotel_id"
   end
 
   create_table "hotels", force: :cascade do |t|
-    t.string "name"
-    t.string "location"
+    t.string "name", null: false
+    t.string "location", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "plans", force: :cascade do |t|
-    t.integer "room_type_id"
-    t.integer "charge"
-    t.date "start_date"
+    t.integer "room_type_id", null: false
+    t.integer "charge", null: false
+    t.date "start_date", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["room_type_id"], name: "index_plans_on_room_type_id"
   end
 
   create_table "prefectures", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "reservation_histories", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "festival_id"
-    t.integer "hotel_id"
-    t.string "festival_name"
-    t.string "festival_location"
-    t.string "hotel_name"
-    t.string "hotel_location"
-    t.string "room_information"
-    t.date "start_date"
-    t.date "end_date"
-    t.integer "total_charge"
+    t.integer "user_id", null: false
+    t.integer "festival_id", null: false
+    t.integer "hotel_id", null: false
+    t.string "festival_name", null: false
+    t.string "festival_location", null: false
+    t.string "hotel_name", null: false
+    t.string "hotel_location", null: false
+    t.string "room_information", null: false
+    t.date "start_date", null: false
+    t.date "end_date", null: false
+    t.integer "total_charge", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["festival_id"], name: "index_reservation_histories_on_festival_id"
@@ -121,13 +121,13 @@ ActiveRecord::Schema.define(version: 2019_09_13_104805) do
   end
 
   create_table "reservations", force: :cascade do |t|
-    t.integer "user_id"
+    t.integer "user_id", null: false
     t.integer "festival_id"
-    t.integer "room_id"
-    t.integer "plan_id"
-    t.date "start_date"
-    t.date "end_date"
-    t.integer "total_charge"
+    t.integer "room_id", null: false
+    t.integer "plan_id", null: false
+    t.date "start_date", null: false
+    t.date "end_date", null: false
+    t.integer "total_charge", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["festival_id"], name: "index_reservations_on_festival_id"
@@ -137,10 +137,10 @@ ActiveRecord::Schema.define(version: 2019_09_13_104805) do
   end
 
   create_table "reviews", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "festival_id"
-    t.string "title"
-    t.text "body"
+    t.integer "user_id", null: false
+    t.integer "festival_id", null: false
+    t.string "title", null: false
+    t.text "body", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["festival_id"], name: "index_reviews_on_festival_id"
@@ -148,16 +148,16 @@ ActiveRecord::Schema.define(version: 2019_09_13_104805) do
   end
 
   create_table "room_types", force: :cascade do |t|
-    t.integer "hotel_id"
-    t.string "name"
-    t.integer "people_count"
+    t.integer "hotel_id", null: false
+    t.string "name", null: false
+    t.integer "people_count", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["hotel_id"], name: "index_room_types_on_hotel_id"
   end
 
   create_table "rooms", force: :cascade do |t|
-    t.integer "room_type_id"
+    t.integer "room_type_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["room_type_id"], name: "index_rooms_on_room_type_id"
@@ -174,10 +174,10 @@ ActiveRecord::Schema.define(version: 2019_09_13_104805) do
     t.datetime "last_sign_in_at"
     t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
-    t.string "last_name"
-    t.string "first_name"
+    t.string "last_name", null: false
+    t.string "first_name", null: false
     t.string "image_id"
-    t.integer "status"
+    t.integer "status", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true

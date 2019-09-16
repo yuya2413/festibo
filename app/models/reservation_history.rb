@@ -1,7 +1,7 @@
 class ReservationHistory < ApplicationRecord
   belongs_to :user
-  belongs_to :festival
-  belongs_to :hotel
+  belongs_to :festival, optional:true
+  belongs_to :hotel, optional:true
 
   validates :festival_name, presence: true
   validates :festival_location, presence: true

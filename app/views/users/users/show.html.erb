@@ -1,2 +1,8 @@
-<h1>Users::Users#show</h1>
+<h1>マイページ</h1>
 <p>Find me in app/views/users/users/show.html.erb</p>
+
+"姓"<%= @user.last_name %>
+"名"<%= @user.first_name %>
+"メアド"<%= @user.email %>
+
+<%= link_to "退会", users_user_quit_path(@user), method: :patch, data: {confirm: "本当に退会しますか？"} %>

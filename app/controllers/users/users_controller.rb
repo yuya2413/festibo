@@ -1,6 +1,6 @@
 class Users::UsersController < ApplicationController
-  def edit
-  end
+  #def edit
+  #end
 
   def show
   end

@@ -11,6 +11,10 @@ Admin.create!(  email: "#{(0...8).map{ ('A'..'Z').to_a[rand(26)] }.join}@seeds.c
 				password: 'password',
 				password_confirmation: 'password'
 	)
+Admin.create!(  email: "admin@festibo.com",
+				password: 'password',
+				password_confirmation: 'password'
+	)
 
 # Categoryを生成
 Category.create!(name: "未定")

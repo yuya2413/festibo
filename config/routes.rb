@@ -5,11 +5,11 @@ Rails.application.routes.draw do
   root to: 'users/festivals#top'
   get 'about', to: 'users/festivals#about'
 
-  #devise_scope :admin do
-  #  get '/admins/sign_in', to: 'devise/sessions#new', as: :new_admin_session
-  #  post '/admins/sign_in', to: 'devise/sessions#create', as: :admin_session
-  #  delete '/admins/sign_out', to: 'devise/sessions#destroy', as: :destroy_admin_session
-  #end
+  namespace :users do
+    devise_scope :user do
+      get '/logout', to: 'sessions#destroy', as: 'logout'
+    end
+  end
 
   namespace :users do
   	resources :users, only:[:edit, :update, :show] do

@@ -1,2 +1,37 @@
-<h1>Admins::Users#index</h1>
-<p>Find me in app/views/admins/users/index.html.erb</p>
+<h1>ユーザ一覧</h1>
+
+<%= form_tag(admins_users_path, :method => 'get') do %>
+    <%= text_field_tag :search %>
+    <%= select_tag 'status', options_for_select([["利用中", 0],["退会済み",1],["強制退会",2]]), include_blank: "ステータス", class:"btn btn-default dropdown-toggle" %>
+    <%= submit_tag 'Search', :name => nil %>
+<% end %>
+<%= form_tag admins_users_path, method: :get do %>
+  		<%= select_tag 'key',
+  		 options_for_select([
+				["ユーザID",'id'],["ユーザ姓",'last_name']
+  		 	]), class:"btn btn-default dropdown-toggle" %>
+  		<%= select_tag 'direction',
+  		 options_for_select([["昇順",'ASC'],['降順','DESC']]),class:"btn btn-default dropdown-toggle" %>
+  		<%= submit_tag '並び替え', name: nil, class:"btn btn-info" %>
+<% end %>
+
+<table class="table table-hover">
+	<thead>
+		<tr>
+            <th>ID</th>
+			<th>ユーザ名</th>
+			<th>ステータス</th>
+			<th>メールアドレス</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @users.each do |user|%>
+        <tr>
+			<th><%= link_to user.id, admins_user_path(user) %></th>
+			<td><a href="/admins/users/<%= user.id %>"><%= user.last_name %><%= user.first_name %></a></td>
+			<td><%= user.status %></td>
+			<td><%= user.email %></td>
+		</tr>
+		<% end %>
+	</tbody>
+</table>

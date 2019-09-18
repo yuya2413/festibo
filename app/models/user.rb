@@ -14,4 +14,9 @@ class User < ApplicationRecord
   validates :last_name, presence:{ message: "苗字を入力してください" }
   validates :first_name, presence:{ message: "名前を入力してください" }
   enum status:{利用中: 0, 退会済み: 1, 強制退会:2}
+
+  def self.search(search)
+    return User.all unless search
+    User.where([' last_name || first_name LIKE ? ', "%#{search}%"])
+  end
 end

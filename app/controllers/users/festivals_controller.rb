@@ -4,7 +4,13 @@ class Users::FestivalsController < ApplicationController
   	@festivals = Festival.all
   	#検索について、現在は都道府県とカテゴリーは同時指定検索可能
   	#日付は単独指定のみで都道府県・カテゴリーとの併用は不可
-  	if params[:prefecture_id].present? && params[:category_id].present? && params[:start_date].present?
+  	if params[:start_date].present?
+  		start_date = Date.parse(params[:start_date])
+  		from = start_date - 7
+  		to = start_date + 8
+  	    @festivals = @festivals.where(start_date: from...to)
+    end
+  	if params[:prefecture_id].present? && params[:category_id].present?
   		@festivals = @festivals.where(["prefecture_id = ?", "#{params[:prefecture_id]}"]).where(["category_id = ?", "#{params[:category_id]}"])
   	elsif params[:prefecture_id].present?
   		@festivals = @festivals.where(["prefecture_id = ?", "#{params[:prefecture_id]}"])
@@ -13,12 +19,6 @@ class Users::FestivalsController < ApplicationController
     else
     	render :index
   	end
-  	if params[:start_date].present?
-  		start_date = Date.parse(params[:start_date])
-  		from = start_date - 7
-  		to = start_date + 8
-  	    @festivals = @festivals.where(start_date: from...to)
-    end
   end
 
   def show

@@ -2,7 +2,16 @@ class Users::FestivalsController < ApplicationController
 
   def index
   	@festivals = Festival.all
-  	@festivals = @festivals.where(["prefecture_id = ?", "#{params[:prefecture_id]}"]) if params[:prefecture_id].present?
+  	#@festivals = @festivals.where(["prefecture_id = ?", "#{params[:prefecture_id]}"]) if params[:prefecture_id].present?
+  	if params[:prefecture_id].present? && params[:category_id].present?
+  		@festivals = @festivals.where(["prefecture_id = ?", "#{params[:prefecture_id]}"]).where(["category_id = ?", "#{params[:category_id]}"])
+  	elsif params[:prefecture_id].present?
+  		@festivals = @festivals.where(["prefecture_id = ?", "#{params[:prefecture_id]}"])
+    elsif params[:category_id].present?
+    	@festivals = @festivals.where(["category_id = ?", "#{params[:category_id]}"])
+    else
+    	render :index
+  	end
   end
 
   def show

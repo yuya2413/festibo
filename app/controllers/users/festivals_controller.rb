@@ -1,13 +1,14 @@
 class Users::FestivalsController < ApplicationController
-  def top
-  end
-
-  def about
-  end
 
   def index
+  	@festivals = Festival.all
   end
 
   def show
+  end
+
+  private
+  def festival_params
+ 	params.require(:festival).permit(:id, :name, :detail, :location, :start_date, :end_date, :value_1, :value_2, :value_3, :value_4, :value_5)
   end
 end

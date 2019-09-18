@@ -1,2 +1,35 @@
 <h1>Users::Festivals#index</h1>
 <p>Find me in app/views/users/festivals/index.html.erb</p>
+
+<table class="table table-hover">
+	<thead>
+		<tr>
+            <th>祭り名</th>
+			<th>祭り説明</th>
+			<th>祭り開催地</th>
+			<th>開催初日</th>
+			<th>開催終了日</th>
+			<th>value1</th>
+			<th>value2</th>
+			<th>value3</th>
+			<th>value4</th>
+			<th>value5</th>
+		</tr>
+	</thead>
+	<tbody>
+        <% @festivals.each do |festival|%>
+        <tr>
+			<td><%= festival.name %></td>
+			<td><%= festival.detail %></td>
+			<td><%= festival.location %></td>
+			<td><%= festival.start_date %></td>
+			<td><%= festival.end_date %></td>
+			<td><%= festival.value_1 %></td>
+			<td><%= festival.value_2 %></td>
+			<td><%= festival.value_3 %></td>
+			<td><%= festival.value_4 %></td>
+			<td><%= festival.value_5 %></td>
+		</tr>
+		<% end %>
+	</tbody>
+</table>

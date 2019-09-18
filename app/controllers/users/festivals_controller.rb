@@ -2,6 +2,7 @@ class Users::FestivalsController < ApplicationController
 
   def index
   	@festivals = Festival.all
+  	@festivals = @festivals.where(["prefecture_id = ?", "#{params[:prefecture_id]}"]) if params[:prefecture_id].present?
   end
 
   def show

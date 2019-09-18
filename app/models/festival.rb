@@ -7,6 +7,7 @@ class Festival < ApplicationRecord
   has_many :reviews, dependent: :destroy
   has_many :reservations, dependent: :destroy
   has_many :reservation_histories
+  accepts_attachments_for :festival_photos, attachment: :image
   accepts_nested_attributes_for :festival_photos, allow_destroy: true
 
   validates :name, presence:{ message: "祭り名を入力してください" }

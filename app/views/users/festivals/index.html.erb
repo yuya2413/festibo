@@ -1,2 +1,43 @@
-<h1>Users::Festivals#index</h1>
-<p>Find me in app/views/users/festivals/index.html.erb</p>
+<h1>祭り検索結果</h1>
+
+<%= render 'search_form' %>
+
+
+<table class="table table-hover">
+	<thead>
+		<tr>
+            <th>祭り名</th>
+			<th>祭り説明</th>
+			<th>祭り開催地</th>
+			<th>開催初日</th>
+			<th>開催終了日</th>
+			<th>value1</th>
+			<th>value2</th>
+			<th>value3</th>
+			<th>value4</th>
+			<th>value5</th>
+			<th>都道府県</th>
+			<th>カテゴリー</th>
+    		<th>画像数</th>
+		</tr>
+	</thead>
+	<tbody>
+        <% @festivals.each do |festival|%>
+        <tr>
+			<td><a href="/users/festivals/<%= festival.id%>"><%= festival.name %></td>
+			<td><%= festival.detail %></td>
+			<td><%= festival.location %></td>
+			<td><%= festival.start_date %></td>
+			<td><%= festival.end_date %></td>
+			<td><%= festival.value_1 %></td>
+			<td><%= festival.value_2 %></td>
+			<td><%= festival.value_3 %></td>
+			<td><%= festival.value_4 %></td>
+			<td><%= festival.value_5 %></td>
+			<td><%= festival.prefecture.name %></td>
+			<td><%= festival.category.name %></td>
+			<td><%= festival.festival_photos.count %></td>
+		</tr>
+		<% end %>
+	</tbody>
+</table>

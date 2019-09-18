@@ -27,6 +27,6 @@ class Users::FestivalsController < ApplicationController
 
   private
   def festival_params
- 	params.require(:festival).permit(:id, :prefecture_id, :category_id, :name, :detail, :location, :start_date, :end_date, :value_1, :value_2, :value_3, :value_4, :value_5)
+ 	params.require(:festival).permit(:id, :prefecture_id, :category_id, :name, :detail, :location, :start_date, :end_date, :value_1, :value_2, :value_3, :value_4, :value_5, festival_photos_attributes: [:id, :image_id, :_destroy])
   end
 end

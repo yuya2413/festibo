@@ -18,6 +18,7 @@
 			<th>value5</th>
 			<th>都道府県</th>
 			<th>カテゴリー</th>
+    		<th>画像数</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -35,6 +36,7 @@
 			<td><%= festival.value_5 %></td>
 			<td><%= festival.prefecture.name %></td>
 			<td><%= festival.category.name %></td>
+			<td><%= festival.festival_photos.count %></td>
 		</tr>
 		<% end %>
 	</tbody>

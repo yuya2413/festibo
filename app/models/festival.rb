@@ -1,12 +1,13 @@
 class Festival < ApplicationRecord
+  belongs_to :prefecture, optional: true
+  belongs_to :category, optional: true
+
   has_many :favorites, dependent: :destroy
   has_many :festival_photos, dependent: :destroy
   has_many :reviews, dependent: :destroy
   has_many :reservations, dependent: :destroy
   has_many :reservation_histories
-
-  belongs_to :prefecture, optional: true
-  belongs_to :category, optional: true
+  accepts_nested_attributes_for :festival_photos, allow_destroy: true
 
   validates :name, presence:{ message: "祭り名を入力してください" }
   validates :location, presence:{ message: "祭り開催地を入力してください" }

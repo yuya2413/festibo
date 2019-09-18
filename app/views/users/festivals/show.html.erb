@@ -30,5 +30,10 @@
 			<td><%= @festival.prefecture.name %></td>
 			<td><%= @festival.category.name %></td>
 		</tr>
+		<% @festival.festival_photos.each do |festival| %>
+		<tr>
+			<td><%= attachment_image_tag festival, :image %></td>
+		</tr>
+		<% end %>
 	</tbody>
 </table>

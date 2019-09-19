@@ -1,5 +1,5 @@
 <h1>Admins::Festivals#show<%= @festival.name %></h1>
-<%= link_to "編集", edit_admins_festival_path(@festival) %>
+<%= link_to "編集", edit_admins_festival_path(@festival.id) %>
 <%= link_to "削除", admins_festival_path(@festival), method: :delete, data: {confirm: "この祭りを削除しますか？"}  %>
 <%= link_to "新規登録", new_admins_festival_path %>
 <%= render 'search_form' %>

@@ -1,3 +1,6 @@
+<% if @festival.errors.any? %>
+<p class="alert alert-danger"><strong>編集エラー</strong>：空欄を埋めてください。</p>
+<% end %>
 <h1>祭り新規登録</h1>
 
 <%= form_for(@festival, url: admins_festivals_path) do |f| %>

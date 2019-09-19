@@ -35,12 +35,34 @@ class Admins::FestivalsController < ApplicationController
   end
 
   def create
+    @festival = Festival.new(festival_params)
+    if params[:category?] && params[:category][:name].present?
+      @festival.festivals_categories.category = Category.new(category_params)
+    end
+    if @festival.save
+      flash[:success] = '祭りを保存しました'
+      redirect_to admins_festival_path(@festival)
+    else
+      render 'new'
+    end
   end
 
   def edit
+    @festival = Festival.find(params[:id])
+    @category = Category.new
   end
 
   def update
+    @festival = Festival.find(params[:id])
+    if params[:category?] && params[:category][:name].present?
+      @festival.festivals_categories.category = Category.new(category_params)
+    end
+    if @festival.update(festival_params)
+      flash[:success] = '祭りを更新しました'
+      redirect_to admins_festival_path(@festival)
+    else
+      render 'edit'
+    end
   end
 
   def destroy
@@ -52,9 +74,12 @@ class Admins::FestivalsController < ApplicationController
 
   private
   def festival_params
- 	params.require(:festival).permit(:id, :prefecture_id, :name, :detail, :location, :start_date, :end_date,
+ 	  params.require(:festival).permit(:id, :prefecture_id, :name, :detail, :location, :start_date, :end_date,
    :value_1, :value_2, :value_3, :value_4, :value_5,
    festivals_categories_attributes:[:id, :festival_id, :category_id, :_destroy],
     festival_photos_attributes: [:id, :image_id, :_destroy])
+  end
+  def category_params
+    params.require(:category).permit(:id, :name)
   end
 end

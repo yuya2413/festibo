@@ -1,2 +1,31 @@
-<h1>Admins::Festivals#index</h1>
-<p>Find me in app/views/admins/festivals/index.html.erb</p>
+<!--管理者祭り一覧-->
+<h1>祭り一覧</h1>
+
+<%= render 'search_form' %>
+
+<%= link_to "祭りを新規登録", new_admins_festival_path %>
+
+<table class="table table-hover">
+	<thead>
+		<tr>
+            <th>ID</th>
+            <th>祭り名</th>
+			<th>カテゴリー</th>
+			<th>開催期間</th>
+			<th>都道府県</th>
+    		<th>画像数</th>
+		</tr>
+	</thead>
+	<tbody>
+        <% @festivals.each do |festival|%>
+        <tr>
+        	<th><%= festival.id %></th>
+			<td><a href="/admins/festivals/<%= festival.id%>"><%= festival.name %></td>
+			<td><%= festival.category.name %></td>
+			<td><%= festival.start_date %> - <%= festival.end_date %></td>
+			<td><%= festival.prefecture.name %></td>
+			<td><%= festival.festival_photos.count %></td>
+		</tr>
+		<% end %>
+	</tbody>
+</table>

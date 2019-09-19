@@ -29,4 +29,8 @@ class Festival < ApplicationRecord
   #    to = start_date + 8
   #    date_search = where(start_date: from...to)
   #end
+  def self.search(search)
+    return Festival.all unless search
+    Festival.where([' name LIKE ? ', "%#{search}%"])
+  end
 end

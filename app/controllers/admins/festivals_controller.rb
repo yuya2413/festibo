@@ -30,6 +30,7 @@ class Admins::FestivalsController < ApplicationController
 
   def new
     @festival = Festival.new
+    @festival.festivals_categories.build
     @category = Category.new
   end
 
@@ -51,6 +52,9 @@ class Admins::FestivalsController < ApplicationController
 
   private
   def festival_params
- 	params.require(:festival).permit(:id, :prefecture_id, :name, :detail, :location, :start_date, :end_date, :value_1, :value_2, :value_3, :value_4, :value_5, festivals_categories_attributes:[:id, :festival_id, :category_id], festival_photos_attributes: [:id, :image_id, :_destroy])
+ 	params.require(:festival).permit(:id, :prefecture_id, :name, :detail, :location, :start_date, :end_date,
+   :value_1, :value_2, :value_3, :value_4, :value_5,
+   festivals_categories_attributes:[:id, :festival_id, :category_id, :_destroy],
+    festival_photos_attributes: [:id, :image_id, :_destroy])
   end
 end

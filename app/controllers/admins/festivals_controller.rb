@@ -29,6 +29,8 @@ class Admins::FestivalsController < ApplicationController
   end
 
   def new
+    @festival = Festival.new
+    @category = Category.new
   end
 
   def create

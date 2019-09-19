@@ -10,10 +10,10 @@
 		<tr>
             <th>ID</th>
             <th>祭り名</th>
-			<th>カテゴリー</th>
 			<th>開催期間</th>
 			<th>都道府県</th>
     		<th>画像数</th>
+   			<th>カテゴリ</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -21,10 +21,14 @@
         <tr>
         	<th><%= festival.id %></th>
 			<td><a href="/admins/festivals/<%= festival.id%>"><%= festival.name %></td>
-			<td><%= festival.festivals_categories.category_ids.name %></td>
 			<td><%= festival.start_date %> - <%= festival.end_date %></td>
 			<td><%= festival.prefecture.name %></td>
 			<td><%= festival.festival_photos.count %></td>
+			<td>
+				<% festival.festivals_categories.each do |festivals_category| %>
+				<%= festivals_category.category.name %>
+				<% end %>
+			</td>
 		</tr>
 		<% end %>
 	</tbody>

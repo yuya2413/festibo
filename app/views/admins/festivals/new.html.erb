@@ -1,6 +1,7 @@
 <h1>祭り新規登録</h1>
 
 <%= form_for(@festival, url: admins_festivals_path) do |f| %>
+    <div>
     <%= f.label :name, "祭り名" %>
     <%= f.text_field :name, autofocus: true, placeholder: "祭り名" %>
     <%= f.label :prefecture_id, "都道府県" %>
@@ -9,17 +10,16 @@
     <%= f.date_field :start_date %> ~ 
     <% f.label :end_date %>
     <%= f.date_field :end_date %>
-    <br>
+    </div><br>
 
 
     <!--下記カテゴリー-->
-    <%= f.label :festivals_categories, "カテゴリー" %>
+    <div>
     <%= f.fields_for :festivals_categories do |festivals_category| %>
-        <%= festivals_category.collection_select :category_id, Category.all, :id, :name, include_blank: "カテゴリーを選択", class:"btn btn-default dropdown-toggle" %>
-        <%= festivals_category.text_field :category_id, placeholder: "新しいカテゴリー" %>
-        <%= festivals_category.check_box :_destroy %>
-    <% end %>
-    <br>
+      <%= render 'festivals_category_fields', :f => festivals_category %>
+          <% end %>
+      <%= link_to_add_association '新しいカテゴリーを追加', f, :festivals_categories, class:'btn btn-success'%>
+    </div><br>
 
     <!--以上、カテゴリー-->
 

@@ -25,12 +25,26 @@ class Admins::FestivalsController < ApplicationController
   end
 
   def show
+    @festival = Festival.find(params[:id])
   end
 
   def new
   end
 
+  def create
+  end
+
   def edit
+  end
+
+  def update
+  end
+
+  def destroy
+    festival = Festival.find(params[:id])
+    festival.destroy
+    flash[:danger] = "祭りを削除しました"
+    redirect_to admins_festivals_path
   end
 
   private

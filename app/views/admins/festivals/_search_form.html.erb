@@ -1,0 +1,9 @@
+<%= form_tag(admins_festivals_path, :method => 'get') do %>
+    <%= text_field_tag :search %>
+	<!--options_from_collection_for_select
+		第１引数は表示させるデータ、第２引数は格納される値、第３引数はViewに表示される値-->
+	<%= date_field_tag 'start_date', include_blank: "開催日", class:"btn btn-default dropdown-toggle"%>
+    <%= select_tag 'prefecture_id', options_from_collection_for_select( Prefecture.all, :id, :name), include_blank: "都道府県", class:"btn btn-default dropdown-toggle" %>
+    <%= select_tag 'category_id', options_from_collection_for_select( Category.all, :id, :name), include_blank: "カテゴリー", class:"btn btn-default dropdown-toggle" %>
+    <%= submit_tag 'Search', :name => nil %>
+<% end %>

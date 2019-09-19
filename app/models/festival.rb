@@ -1,6 +1,9 @@
 class Festival < ApplicationRecord
   belongs_to :prefecture, optional: true
-  belongs_to :category, optional: true
+
+  has_many :festivals_categories
+  has_many :categories, through: :festivals_categories
+  accepts_nested_attributes_for :festivals_categories, allow_destroy: true
 
   has_many :favorites, dependent: :destroy
   has_many :festival_photos, dependent: :destroy
@@ -29,4 +32,8 @@ class Festival < ApplicationRecord
   #    to = start_date + 8
   #    date_search = where(start_date: from...to)
   #end
+  def self.search(search)
+    return Festival.all unless search
+    Festival.where([' name LIKE ? ', "%#{search}%"])
+  end
 end

@@ -1,2 +1,46 @@
-<h1>Admins::Festivals#new</h1>
-<p>Find me in app/views/admins/festivals/new.html.erb</p>
+<% if @festival.errors.any? %>
+<p class="alert alert-danger"><strong>編集エラー</strong>：空欄を埋めてください。</p>
+<% end %>
+<h1>祭り新規登録</h1>
+
+<%= form_for(@festival, url: admins_festivals_path) do |f| %>
+    <div>
+    <%= f.label :name, "祭り名" %>
+    <%= f.text_field :name, autofocus: true, placeholder: "祭り名" %>
+    <%= f.label :prefecture_id, "都道府県" %>
+    <%= f.collection_select :prefecture_id, Prefecture.all, :id, :name, include_blank: "都道府県", class:"btn btn-default dropdown-toggle" %>
+    <%= f.label :start_date, "開催期間" %>
+    <%= f.date_field :start_date %> ~ 
+    <% f.label :end_date %>
+    <%= f.date_field :end_date %>
+    </div><br>
+
+
+    <!--下記カテゴリー-->
+    <div>
+    <%= f.fields_for :festivals_categories do |festivals_category| %>
+      <%= render 'festivals_category_fields', :f => festivals_category %>
+          <% end %>
+      <%= link_to_add_association '新しいカテゴリーを追加', f, :festivals_categories, class:'btn btn-success'%>
+    </div><br>
+
+    <!--以上、カテゴリー-->
+
+    <%= f.label :detail, "説明" %>
+    <%= f.text_area :detail, placeholder: "祭り説明" %>
+    <%= f.label :location, "会場住所" %>
+    <%= f.text_field :location, placeholder: "都道府県から入力" %>
+
+    <br>
+
+    <%= f.select :value_1, Festival.value_1s.keys, include_blank: "【規模】", class:"btn btn-default dropdown-toggle" %>
+    <%= f.select :value_2, Festival.value_2s.keys, include_blank: "【歴史】", class:"btn btn-default dropdown-toggle" %>
+    <%= f.select :value_3, Festival.value_3s.keys, include_blank: "【全国/地元】", class:"btn btn-default dropdown-toggle" %>
+    <%= f.select :value_4, Festival.value_4s.keys, include_blank: "【王道/奇祭】", class:"btn btn-default dropdown-toggle" %>
+    <%= f.select :value_5, Festival.value_5s.keys, include_blank: "【子供/大人向け】", class:"btn btn-default dropdown-toggle" %>
+    <br>
+
+    <%= f.submit "新規登録" %>
+    <%= link_to "内容を破棄", admins_festivals_path %>
+
+<% end %>

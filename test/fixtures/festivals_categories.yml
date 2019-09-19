@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  festival: one
+  category: one
+
+two:
+  festival: two
+  category: two

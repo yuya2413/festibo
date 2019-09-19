@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_18_124924) do
+ActiveRecord::Schema.define(version: 2019_09_19_012548) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -80,7 +80,6 @@ ActiveRecord::Schema.define(version: 2019_09_18_124924) do
 
   create_table "festivals", force: :cascade do |t|
     t.integer "prefecture_id", null: false
-    t.integer "category_id", null: false
     t.string "name", null: false
     t.text "detail"
     t.string "location", null: false
@@ -93,8 +92,16 @@ ActiveRecord::Schema.define(version: 2019_09_18_124924) do
     t.integer "value_5", default: 2, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["category_id"], name: "index_festivals_on_category_id"
     t.index ["prefecture_id"], name: "index_festivals_on_prefecture_id"
+  end
+
+  create_table "festivals_categories", force: :cascade do |t|
+    t.integer "festival_id"
+    t.integer "category_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_festivals_categories_on_category_id"
+    t.index ["festival_id"], name: "index_festivals_categories_on_festival_id"
   end
 
   create_table "hotel_photos", force: :cascade do |t|

@@ -21,7 +21,7 @@
         <tr>
         	<th><%= festival.id %></th>
 			<td><a href="/admins/festivals/<%= festival.id%>"><%= festival.name %></td>
-			<td><%= festival.category.name %></td>
+			<td><%= festival.festivals_categories.category_ids.name %></td>
 			<td><%= festival.start_date %> - <%= festival.end_date %></td>
 			<td><%= festival.prefecture.name %></td>
 			<td><%= festival.festival_photos.count %></td>

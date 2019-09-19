@@ -50,7 +50,6 @@ end
 	end_date = start_date + rand(1..7)
 	Festival.create!(
 		prefecture_id: rand(1..47),
-		category_id: rand(1..categories.length),
 		name: name,
 		detail: detail,
 		location: location,
@@ -61,6 +60,15 @@ end
 		value_3: rand(0..4),
 		value_4: rand(0..4),
 		value_5: rand(0..4)
+		)
+end
+
+
+# FestivalsCategoryを生成
+81.times do |n|
+	FestivalsCategory.create!(
+		festival_id: rand(1..27),
+		category_id: rand(1..13),
 		)
 end
 
@@ -95,11 +103,22 @@ end
 		)
 end
 
+# RoomTypeを生成
+81.times do |n|
+	bed_type = %w[シングル ダブル キング クイーン]
+	bed_count = rand(1..2).to_s
+	RoomType.create!(
+		hotel_id: rand(1..27),
+		name: bed_type.sample + bed_count + "台",
+		people_count: rand(1..5)
+		)
+end
+
 # Planを生成
 27.times do |n|
 	Plan.create!(
 		room_type_id: rand(1..54),
-		charge: name,
+		charge: (rand (1..10)) *1000,
 		start_date: Faker::Date.between(from: 200.days.ago, to: 2.days.from_now)
 		)
 end
@@ -111,12 +130,29 @@ end
 		)
 end
 
-
-
-# 下記保留中
-# RoomTypeを生成
 # Roomを生成
+162.times do |n|
+Room.create!(
+	room_type_id: rand(1..81)
+	)
+end
+
 # Userを生成
+27.times do |n|
+	last_name = %w[山口 安倍 後藤 伊藤 斎藤 高橋 高田 高山 山田 藤本 藤井 藤崎 東久邇宮 プルースト]
+	first_name = %w[家康 義経 家光 光圀 忠家 義久 阿弖流為 サルヴァドール]
+	email = "#{(0...8).map{ ('A'..'Z').to_a[rand(26)] }.join}@seeds.com"
+	password = "password"
+	User.create!(
+		last_name: last_name.sample,
+		first_name: first_name.sample,
+		status: rand(0..2),
+		email: email,
+		password: password,
+		password_confirmation: password
+		)
+end
+
 # 生成しないDB,ReservationHistory, Reservation,Review
 
 

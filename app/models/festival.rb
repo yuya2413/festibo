@@ -1,6 +1,9 @@
 class Festival < ApplicationRecord
   belongs_to :prefecture, optional: true
-  belongs_to :category, optional: true
+
+  has_many :festivals_categories
+  has_many :categories, through: :festivals_categories
+  accepts_nested_attributes_for :festivals_categories
 
   has_many :favorites, dependent: :destroy
   has_many :festival_photos, dependent: :destroy

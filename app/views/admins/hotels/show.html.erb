@@ -1,2 +1,31 @@
-<h1>Admins::Hotels#show</h1>
-<p>Find me in app/views/admins/hotels/show.html.erb</p>
+<h1>Admins::Hotels#show<%= @hotel.name %></h1>
+<%= link_to "編集", edit_admins_hotel_path(@hotel.id) %>
+<%= link_to "削除", admins_hotel_path(@hotel), method: :delete, data: {confirm: "このホテルを削除しますか？"}  %>
+<%= link_to "新規登録", new_admins_hotel_path %>
+<%= render 'search_form' %>
+<table class="table table-hover">
+	<thead>
+		<tr>
+            <th>ホテル名</th>
+			<th>ホテル住所</th>
+		</tr>
+	</thead>
+	<tbody>
+        <tr>
+			<td><%= @hotel.name %></td>
+			<td><%= @hotel.location %></td>
+		</tr>
+		<tr>
+			<% @hotel.hotel_photos.each do |hotel_photo| %>
+			<td><%= attachment_image_tag hotel_photo, :image, style: "width: 100px; height: 100px;" %></td>
+			<% end %>
+		</tr>
+
+		<% @hotel.room_types.each do |room_type| %>
+		<tr>
+			<td><%= room_type.name %></td>
+			<td><%= room_type.people_count %></td>
+		</tr>
+		<% end %>
+	</tbody>
+</table>

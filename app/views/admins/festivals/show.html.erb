@@ -41,7 +41,7 @@
 		</tr>
 		<tr>
 			<% @festival.festival_photos.each do |festival_photo|%>
-			<td><%= image_tag festival_photo.image_id, style: "width: 100px; height: 100px;" %></td>
+			<td><%= attachment_image_tag festival_photo, :image, style: "width: 100px; height: 100px;" %></td>
 			<% end %>
 		</tr>
 	</tbody>

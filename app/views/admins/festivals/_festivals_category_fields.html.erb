@@ -1,10 +1,5 @@
  <div class='nested-fields'>
-        <%= f.label :festivals_categories, "カテゴリー" %>
-        <%= f.collection_select :category_id, Category.all, :id, :name, include_blank: "カテゴリーを選択", class:"btn btn-default dropdown-toggle" %>
-
-        <%= label_tag :category?, "新規登録" %>
-        <%= text_field_tag "category[name]", "", placeholder: 'カテゴリー名'%>
-
-
+    <%= f.label :festivals_categories, "カテゴリー" %>
+    <%= f.collection_select :category_id, Category.all, :id, :name, include_blank: "カテゴリーを選択", class:"btn btn-default dropdown-toggle" %>
     <%= link_to_remove_association "カテゴリーを削除", f, class:"btn btn-danger" %>
 </div>

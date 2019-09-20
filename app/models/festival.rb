@@ -5,18 +5,20 @@ class Festival < ApplicationRecord
   has_many :categories, through: :festivals_categories
   accepts_nested_attributes_for :festivals_categories, allow_destroy: true
 
-  has_many :favorites, dependent: :destroy
   has_many :festival_photos, dependent: :destroy
+  accepts_attachments_for :festival_photos, attachment: :image
+  accepts_nested_attributes_for :festival_photos, allow_destroy: true
+
+  has_many :favorites, dependent: :destroy
   has_many :reviews, dependent: :destroy
   has_many :reservations, dependent: :destroy
   has_many :reservation_histories
-  accepts_attachments_for :festival_photos, attachment: :image
-  accepts_nested_attributes_for :festival_photos, allow_destroy: true
 
   validates :name, presence:{ message: "祭り名を入力してください" }
   validates :location, presence:{ message: "祭り開催地を入力してください" }
   validates :start_date, presence:{ message: "祭り開始日を入力してください" }
   validates :end_date, presence:{ message: "祭り終了日を入力してください" }
+  validate :start_end_check
 
   enum value_1:{とても大きい: 0, 大きい: 1, 普通: 2, 小さい: 3, とても小さい: 4}
   enum value_2:{歴史がある: 0, 約30年: 1, 約20年: 2, 約10年: 3, 最近: 4}
@@ -32,6 +34,12 @@ class Festival < ApplicationRecord
   #    to = start_date + 8
   #    date_search = where(start_date: from...to)
   #end
+
+  def start_end_check
+    errors.add(:end_date, "の日付を正しく記入してください。") unless
+    self.start_date < self.end_date
+  end
+
   def self.search(search)
     return Festival.all unless search
     Festival.where([' name LIKE ? ', "%#{search}%"])

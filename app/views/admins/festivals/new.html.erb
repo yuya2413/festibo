@@ -1,6 +1,12 @@
 <% if @festival.errors.any? %>
-<p class="alert alert-danger"><strong>編集エラー</strong>：空欄を埋めてください。</p>
+<p class="alert alert-danger">
+    <strong>編集エラー：</strong>
+    <% @festival.errors.full_messages.each do |message| %>
+        <%= message %>
+        <% end %>
+</p>
 <% end %>
+
 <h1>祭り新規登録</h1>
 
 <%= form_for(@festival, url: admins_festivals_path) do |f| %>
@@ -39,6 +45,17 @@
     <%= f.select :value_4, Festival.value_4s.keys, include_blank: "【王道/奇祭】", class:"btn btn-default dropdown-toggle" %>
     <%= f.select :value_5, Festival.value_5s.keys, include_blank: "【子供/大人向け】", class:"btn btn-default dropdown-toggle" %>
     <br>
+
+    <!--以下、祭り画像-->
+    <div>
+    <%= f.fields_for :festival_photos do |festival_photo| %>
+      <%= render 'festival_photo_fields', :f => festival_photo %>
+          <% end %>
+      <%= link_to_add_association '新しい画像を追加', f, :festival_photos, class:'btn btn-success'%>
+    </div><br>
+
+    <!--以上、祭り画像-->
+
 
     <%= f.submit "新規登録" %>
     <%= link_to "内容を破棄", admins_festivals_path %>

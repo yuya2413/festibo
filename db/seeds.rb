@@ -72,9 +72,19 @@ end
 		)
 end
 
+# Hotelを生成
+27.times do |n|
+	name = "ホテル-#{n+2}"
+	location = "ホテル-#{n+2}の開催地"
+	Hotel.create!(
+		name: name,
+		location: location,
+		)
+end
+
 # HotelPhotoを生成
 54.times do |n|
-	festival_id = rand(1..27)
+	hotel_id = rand(1..27)
 	image_id = [
 		"gunkanjimaFTHG4531_TP_V.jpg",
 		"hiroto_htmachi_TP_V.jpg",
@@ -87,19 +97,9 @@ end
 		"YAMA_DSC0929_TP_V.jpg",
 		"ZUhaikyoDSC_1190_TP_V.jpg"
 	]
-	FestivalPhoto.create!(
-		festival_id: festival_id,
+	HotelPhoto.create!(
+		hotel_id: hotel_id,
 		image_id: image_id.sample
-		)
-end
-
-# Hotelを生成
-27.times do |n|
-	name = "ホテル-#{n+2}"
-	location = "ホテル-#{n+2}の開催地"
-	Hotel.create!(
-		name: name,
-		location: location,
 		)
 end
 

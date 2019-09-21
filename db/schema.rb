@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_21_045742) do
+ActiveRecord::Schema.define(version: 2019_09_21_051915) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -119,14 +119,6 @@ ActiveRecord::Schema.define(version: 2019_09_21_045742) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "plans", force: :cascade do |t|
-    t.integer "room_type_id", null: false
-    t.integer "charge", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["room_type_id"], name: "index_plans_on_room_type_id"
-  end
-
   create_table "prefectures", force: :cascade do |t|
     t.integer "name", null: false
     t.datetime "created_at", null: false
@@ -156,14 +148,12 @@ ActiveRecord::Schema.define(version: 2019_09_21_045742) do
     t.integer "user_id", null: false
     t.integer "festival_id"
     t.integer "room_id", null: false
-    t.integer "plan_id", null: false
     t.date "start_date", null: false
     t.date "end_date", null: false
     t.integer "total_charge", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["festival_id"], name: "index_reservations_on_festival_id"
-    t.index ["plan_id"], name: "index_reservations_on_plan_id"
     t.index ["room_id"], name: "index_reservations_on_room_id"
     t.index ["user_id"], name: "index_reservations_on_user_id"
   end

@@ -52,6 +52,7 @@ class Admins::HotelsController < ApplicationController
     redirect_to admins_hotels_path
   end
 
+
   private
     def hotel_params
  	  params.require(:hotel).permit(:id, :name, :location,

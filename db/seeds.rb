@@ -110,16 +110,8 @@ end
 	RoomType.create!(
 		hotel_id: rand(1..27),
 		name: bed_type.sample + bed_count + "台",
+	    charge: (rand (1..10)) *1000,
 		people_count: rand(1..5)
-		)
-end
-
-# Planを生成
-27.times do |n|
-	Plan.create!(
-		room_type_id: rand(1..54),
-		charge: (rand (1..10)) *1000,
-		start_date: Faker::Date.between(from: 200.days.ago, to: 2.days.from_now)
 		)
 end
 

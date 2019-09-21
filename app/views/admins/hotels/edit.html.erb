@@ -1,2 +1,44 @@
-<h1>Admins::Hotels#edit</h1>
-<p>Find me in app/views/admins/hotels/edit.html.erb</p>
+<% if @hotel.errors.any? %>
+<p class="alert alert-danger">
+    <strong>編集エラー：</strong>
+    <% @hotel.errors.full_messages.each do |message| %>
+        <%= message %>
+        <% end %>
+</p>
+<% end %>
+
+<h1>ホテル編集<%= @hotel.name %></h1>
+
+<%= form_for(@hotel, url: admins_hotel_path(@hotel)) do |f| %>
+    <div>
+    <%= f.label :name, "ホテル名" %>
+    <%= f.text_field :name, autofocus: true, placeholder: "ホテル名" %>
+    <%= f.label :location, "住所" %>
+    <%= f.text_field :location, placeholder: "都道府県から入力" %>
+    </div><br>
+
+
+    <!--以下、ホテル画像-->
+    <div>
+    <%= f.fields_for :hotel_photos do |hotel_photo| %>
+      <%= render 'hotel_photo_fields', :f => hotel_photo %>
+          <% end %>
+      <%= link_to_add_association '新しい画像を追加', f, :hotel_photos, class:'btn btn-success'%>
+    </div><br>
+    <!--以上、ホテル画像-->
+
+    <!--以下、部屋タイプ、部屋数-->
+    <div>
+    <%= f.fields_for :room_types do |room_type| %>
+      <%= render 'room_type_fields', :f => room_type %>
+          <% end %>
+      <div class="links">
+        <%= link_to_add_association '新しい部屋タイプを追加', f, :room_types, class:'btn btn-success'%>
+      </div>
+    </div><br>
+    <!--以上、部屋タイプ、部屋数-->
+
+    <%= f.submit "変更を確定" %>
+    <%= link_to "内容を破棄", admins_hotel_path(@hotel) %>
+
+<% end %>

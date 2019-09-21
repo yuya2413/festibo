@@ -27,7 +27,6 @@
     </div><br>
     <!--以上、ホテル画像-->
 
-
     <!--以下、部屋タイプ、部屋数-->
     <div>
     <%= f.fields_for :room_types do |room_type| %>
@@ -37,13 +36,7 @@
         <%= link_to_add_association '新しい部屋タイプを追加', f, :room_types, class:'btn btn-success'%>
       </div>
     </div><br>
-
     <!--以上、部屋タイプ、部屋数-->
-
-
-
-
-
 
     <%= f.submit "新規登録" %>
     <%= link_to "内容を破棄", admins_hotels_path %>

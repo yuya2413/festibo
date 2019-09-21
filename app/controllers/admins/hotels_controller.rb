@@ -18,13 +18,11 @@ class Admins::HotelsController < ApplicationController
   def new
     @hotel = Hotel.new
     @room_type = @hotel.room_types.build
-    @plan = @room_type.plans.build
     @room = @room_type.rooms.build
   end
 
   def create
     @hotel = Hotel.new(hotel_params)
-    @room =
     if @hotel.save
       flash[:success] = 'ホテルを保存しました'
       redirect_to admins_hotel_path(@hotel)
@@ -37,12 +35,20 @@ class Admins::HotelsController < ApplicationController
     @hotel = Hotel.find(params[:id])
   end
 
+  def destroy
+    hotel = Hotel.find(params[:id])
+    hotel.destroy
+    flash[:danger] = "ホテルを削除しました"
+    redirect_to admins_hotels_path
+  end
+
+
+
   private
     def hotel_params
  	  params.require(:hotel).permit(:id, :name, :location,
-   room_types_attributes:[:id, :name, :people_count, :_destroy],
-   plans_attributes:[:id, :room_type_id, :charge, :_destroy],
-   rooms_attributes:[:id, :room_type_id, :_destroy],
+   room_types_attributes:[:id, :name, :people_count, :charge, :_destroy,
+   rooms_attributes:[:id, :room_type_id, :name, :_destroy]],
    hotel_photos_attributes: [:id, :image, :_destroy])
   end
 end

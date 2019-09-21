@@ -3,16 +3,19 @@
     <%= f.text_field :name, placeholder: "例:シングル2台" %>
     <%= f.label :people_count, "人数" %>
     <%= f.number_field :people_count %>
+    <%= f.label :charge, "一泊料金" %>
+    <%= f.number_field :charge, placeholder: "¥" %>
 
-    <!---以下、宿泊プランと部屋数-->
-
-    <%= f.fields_for :plans do |plan| %>
-        <%= render 'plan_fields', :f => plan %>
-    <% end %>
+    <!---以下、部屋数-->
+    <div>
     <%= f.fields_for :rooms do |room| %>
         <%= render 'room_fields', :f => room %>
     <% end %>
-    <!---以上、宿泊プランと部屋数-->
+      <div class="links">
+        <%= link_to_add_association '部屋を追加', f, :rooms, class:"btn btn-info"%>
+      </div>
+    </div>
+    <!---以上、部屋数-->
 
-    <%= link_to_remove_association "削除", f, class:"btn btn-danger" %>
+    <%= link_to_remove_association "部屋タイプを削除", f, class:"btn btn-danger" %>
 </div>

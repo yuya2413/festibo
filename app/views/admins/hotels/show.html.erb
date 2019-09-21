@@ -27,8 +27,9 @@
 		<tr>
 			<th>部屋タイプ</th>
 			<th>人数</th>
-			<th>宿泊プラン数</th>
+			<th>一泊あたりの料金</th>
 			<th>部屋数</th>
+			<th>部屋名</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -36,8 +37,13 @@
         <tr>
 			<td><%= room_type.name %></td>
 			<td><%= room_type.people_count %></td>
-			<td><%= room_type.plans.count %></td>
+			<td><%= room_type.charge %></td>
 			<td><%= room_type.rooms.count %></td>
+			<td>
+    			<% room_type.rooms.each do |room| %>
+	    	        <<%= room.name %>>
+		        <% end %>
+		    </td>
 　　　　　</tr>
 		<% end %>
 	</tbody>

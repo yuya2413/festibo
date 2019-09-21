@@ -28,15 +28,17 @@
     <!--以上、ホテル画像-->
 
 
-    <!--以下、部屋タイプ、宿泊プラン、部屋数-->
+    <!--以下、部屋タイプ、部屋数-->
     <div>
     <%= f.fields_for :room_types do |room_type| %>
       <%= render 'room_type_fields', :f => room_type %>
           <% end %>
-      <%= link_to_add_association '新しいプランを追加', f, :room_types, class:'btn btn-success'%>
+      <div class="links">
+        <%= link_to_add_association '新しい部屋タイプを追加', f, :room_types, class:'btn btn-success'%>
+      </div>
     </div><br>
 
-    <!--以上、部屋タイプ、宿泊プラン、部屋数-->
+    <!--以上、部屋タイプ、部屋数-->
 
 
 

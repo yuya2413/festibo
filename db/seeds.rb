@@ -124,8 +124,9 @@ end
 
 # Roomを生成
 162.times do |n|
-Room.create!(
-	room_type_id: rand(1..81)
+	Room.create!(
+		room_type_id: rand(1..81),
+		name: rand(1..9).to_s + rand(0..1).to_s + rand(1..9).to_s
 	)
 end
 

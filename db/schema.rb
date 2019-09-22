@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_21_094334) do
+ActiveRecord::Schema.define(version: 2019_09_22_025541) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -114,9 +114,21 @@ ActiveRecord::Schema.define(version: 2019_09_21_094334) do
 
   create_table "hotels", force: :cascade do |t|
     t.string "name", null: false
-    t.string "location", null: false
+    t.string "address", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.float "latitude"
+    t.float "longitude"
+  end
+
+  create_table "maps", force: :cascade do |t|
+    t.integer "hotel_id"
+    t.float "latitude"
+    t.float "longitude"
+    t.string "address"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["hotel_id"], name: "index_maps_on_hotel_id"
   end
 
   create_table "prefectures", force: :cascade do |t|

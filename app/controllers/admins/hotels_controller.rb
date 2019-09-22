@@ -2,12 +2,12 @@ class Admins::HotelsController < ApplicationController
 	before_action :authenticate_admin!
   def index
   	@hotels = Hotel.all
-  	if params[:search].present? && params[:search_by_location].present?
-  		@hotels = @hotels.search(params[:search]).search_by_location(params[:search_by_location])
+  	if params[:search].present? && params[:search_by_address].present?
+  		@hotels = @hotels.search(params[:search]).search_by_address(params[:search_by_address])
   	elsif params[:search].present?
   		@hotels = @hotels.search(params[:search])
-    else  params[:search_by_location].present?
-  		@hotels = @hotels.search_by_location(params[:search_by_location])
+    else  params[:search_by_address].present?
+  		@hotels = @hotels.search_by_location(params[:search_by_address])
   	end
   end
 
@@ -55,7 +55,7 @@ class Admins::HotelsController < ApplicationController
 
   private
     def hotel_params
- 	  params.require(:hotel).permit(:id, :name, :location,
+ 	  params.require(:hotel).permit(:id, :name, :address, :latitude, :longitude,
    room_types_attributes:[:id, :name, :people_count, :charge, :_destroy,
    rooms_attributes:[:id, :room_type_id, :name, :_destroy]],
    hotel_photos_attributes: [:id, :image, :_destroy])

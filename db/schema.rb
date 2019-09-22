@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_22_025541) do
+ActiveRecord::Schema.define(version: 2019_09_22_043844) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -82,7 +82,7 @@ ActiveRecord::Schema.define(version: 2019_09_22_025541) do
     t.integer "prefecture_id", null: false
     t.string "name", null: false
     t.text "detail"
-    t.string "location", null: false
+    t.string "address", null: false
     t.date "start_date", null: false
     t.date "end_date", null: false
     t.integer "value_1", null: false
@@ -92,6 +92,8 @@ ActiveRecord::Schema.define(version: 2019_09_22_025541) do
     t.integer "value_5", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.float "latitude"
+    t.float "longitude"
     t.index ["prefecture_id"], name: "index_festivals_on_prefecture_id"
   end
 

@@ -21,8 +21,8 @@ Rails.application.routes.draw do
   	    get 'reservations/:id/thanks', to: 'reservations#complete', as: 'reservation_complete'
     end
     resources :festivals, only:[:index, :show]
+    get 'festivals/:id/hotels', to: "hotels#index", as: "hotels"
     resource :favorites, only:[:create, :destroy]
-    resources :hotels, only:[:index, :show]
     resources :reservation_histories, only:[:show]
     resources :reviews, only:[:new, :create, :destroy]
   end

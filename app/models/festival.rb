@@ -1,4 +1,7 @@
 class Festival < ApplicationRecord
+  geocoded_by :address
+  after_validation :geocode, if: :address_changed?
+
   belongs_to :prefecture, optional: true
 
   has_many :festivals_categories
@@ -15,7 +18,7 @@ class Festival < ApplicationRecord
   has_many :reservation_histories
 
   validates :name, presence:{ message: "祭り名を入力してください" }
-  validates :location, presence:{ message: "祭り開催地を入力してください" }
+  validates :address, presence:{ message: "祭り開催地を入力してください" }
   validates :start_date, presence:{ message: "祭り開始日を入力してください" }
   validates :end_date, presence:{ message: "祭り終了日を入力してください" }
   validate :start_end_check

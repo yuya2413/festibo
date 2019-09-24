@@ -1,5 +1,6 @@
 <h1><%= @festival.name %></h1>
 <%= render 'search_form' %>
+<%= link_to "近くのホテルをチェック", users_hotels_path(@festival) %>
 <table class="table table-hover">
 	<thead>
 		<tr>
@@ -19,7 +20,7 @@
         <tr>
 			<td><%= @festival.name %></td>
 			<td><%= @festival.detail %></td>
-			<td><%= @festival.location %></td>
+			<td><%= @festival.address %></td>
 			<td><%= @festival.start_date %></td>
 			<td><%= @festival.end_date %></td>
 			<td><%= @festival.value_1 %></td>
@@ -28,12 +29,56 @@
 			<td><%= @festival.value_4 %></td>
 			<td><%= @festival.value_5 %></td>
 			<td><%= @festival.prefecture.name %></td>
-			<td><%= @festival.category.name %></td>
+			<td>
+				<% @festival.festivals_categories.each do |festivals_category| %>
+				<%= festivals_category.category.name %>
+				<% end %>
+			</td>
 		</tr>
 		<tr>
 			<% @festival.festival_photos.each do |festival_photo|%>
-			<td><%= image_tag festival_photo.image_id, style: "width: 100px; height: 100px;" %></td>
+			<td><%= attachment_image_tag festival_photo, :image, style: "width: 100px; height: 100px;" %></td>
 			<% end %>
 		</tr>
 	</tbody>
 </table>
+<!--下記、Google Map表示-->
+<h2>gmap</h2>
+latitude:<%= @festival.latitude %><br>
+longitude:<%= @festival.longitude %>
+<style>
+#map{
+  height: 400px;
+  width: 400px;
+}
+</style>
+
+    <div id="map"></div>
+    <script>
+    function initMap() {
+    var test ={lat: <%= @festival.latitude %>, lng: <%= @festival.longitude %>};
+    var map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 15,
+      center: test
+    });
+    var transitLayer = new google.maps.TransitLayer();
+    transitLayer.setMap(map);
+
+    var contentString = "住所：<%= @festival.address %>";
+    var infowindow = new google.maps.InfoWindow({
+      content: contentString
+    });
+
+    var marker = new google.maps.Marker({
+      position:test,
+      map: map,
+      title: contentString
+    });
+
+    marker.addListener('click', function() {
+      infowindow.open(map, marker);
+    });
+    }
+    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDwNc99Q2u5MzbjDkJp3kb1u2IH_-ofbBk&callback=initMap"
+    ></script>

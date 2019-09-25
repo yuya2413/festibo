@@ -7,10 +7,10 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 # Adminを生成
-Admin.create!(  email: "#{(0...8).map{ ('A'..'Z').to_a[rand(26)] }.join}@seeds.com",
-				password: 'password',
-				password_confirmation: 'password'
-	)
+#Admin.create!(  email: "#{(0...8).map{ ('A'..'Z').to_a[rand(26)] }.join}@seeds.com",
+#				password: 'password',
+#				password_confirmation: 'password'
+#	)
 Admin.create!(  email: "admin@festibo.com",
 				password: 'password',
 				password_confirmation: 'password'
@@ -63,7 +63,7 @@ end
 		)
 end
 
-# 青森ねぶた祭り
+# id=28, 青森ねぶた祭り
 Festival.create(
 	prefecture_id: "#{2}",
 	name: "ねぶた祭り",
@@ -80,7 +80,7 @@ Festival.create(
 	longitude: "#{140.740531}"
 	)
 
-# 秋田竿頭祭り
+# id=29, 秋田竿頭祭り
 Festival.create(
 	prefecture_id: "#{5}",
 	name: "竿頭祭り",
@@ -97,7 +97,7 @@ Festival.create(
 	longitude: "#{140.128896}"
 	)
 
-# さっぽろ雪祭り
+# id=30, さっぽろ雪祭り
 Festival.create(
 	prefecture_id: "#{1}",
 	name: "さっぽろ雪祭り",
@@ -140,7 +140,7 @@ end
 		)
 end
 
-# Hotel for ねぶた祭り
+# Hotel for ねぶた祭り id=28-37
 Hotel.create(name: "ホテル青森",
 	address: "青森県青森市安方2-4-12",
 	latitude: "#{40.829148}",
@@ -183,7 +183,7 @@ Hotel.create(name: "秘密結社NEPUTA",
 	longitude: "#{140.861096}")
 
 
-# Hotel for 竿頭祭り
+# Hotel for 竿頭祭り id=38-47
 Hotel.create(name: "ホテル秋田",
 	address: "秋田県秋田市中通5-2-1",
 	latitude: "#{39.713107}",
@@ -225,7 +225,7 @@ Hotel.create(name: "Hotel ラブレボリューション",
 	latitude: "#{39.720765}",
 	longitude: "#{140.119265}")
 
-# Hotel for 雪祭り
+# Hotel for 雪祭り id=48-57
 Hotel.create(name: "ホテル札幌",
 	address: "北海道札幌市中央区大通西5-3",
 	latitude: "#{43.059758}",
@@ -353,7 +353,55 @@ end
 		)
 end
 
-# 生成しないDB,ReservationHistory, Reservation,Review
+
+# ねぶた祭りのReservationを生成
+60.times do |n|
+	from = Date.parse("2019/07/31")
+	to = Date.parse("2019/08/09")
+	start_date = rand(from..to)
+	end_date = start_date +rand(1..5)
+	Reservation.create!(
+		user_id: rand(1..27),
+		festival_id: 28,
+		room_id: rand(163..342),
+        start_date: start_date,
+        end_date: end_date,
+		total_charge: (rand (1..10)) *1000
+		)
+end
+
+# 竿頭祭りのReservationを生成
+60.times do |n|
+	from = Date.parse("2019/08/02")
+	to = Date.parse("2019/08/08")
+	start_date = rand(from..to)
+	end_date = start_date +rand(1..5)
+	Reservation.create!(
+		user_id: rand(1..27),
+		festival_id: 29,
+		room_id: rand(163..342),
+        start_date: start_date,
+        end_date: end_date,
+		total_charge: (rand (1..10)) *1000
+		)
+end
+
+# さっぽろ雪祭りのReservationを生成
+60.times do |n|
+	from = Date.parse("2020/01/30")
+	to = Date.parse("2020/02/13")
+	start_date = rand(from..to)
+	end_date = start_date +rand(1..5)
+	Reservation.create!(
+		user_id: rand(1..27),
+		festival_id: 30,
+		room_id: rand(163..342),
+        start_date: start_date,
+        end_date: end_date,
+		total_charge: (rand (1..10)) *1000
+		)
+end
+# 生成しないDB,ReservationHistory, ,Review
 
 
 

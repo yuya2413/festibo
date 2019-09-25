@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_25_122955) do
+ActiveRecord::Schema.define(version: 2019_09_22_043844) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -167,9 +167,7 @@ ActiveRecord::Schema.define(version: 2019_09_25_122955) do
     t.integer "total_charge", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "hotel_id"
     t.index ["festival_id"], name: "index_reservations_on_festival_id"
-    t.index ["hotel_id"], name: "index_reservations_on_hotel_id"
     t.index ["room_id"], name: "index_reservations_on_room_id"
     t.index ["user_id"], name: "index_reservations_on_user_id"
   end

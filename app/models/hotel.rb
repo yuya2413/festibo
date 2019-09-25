@@ -9,7 +9,6 @@ class Hotel < ApplicationRecord
   has_many :room_types, dependent: :destroy
   accepts_nested_attributes_for :room_types, allow_destroy: true
 
-  has_many :reservations, dependent: :destroy
   has_many :reservation_histories
 
   validates :name, presence:{ message: "ホテル名を入力してください" }

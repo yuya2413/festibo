@@ -42,3 +42,27 @@ longitude:<%= @festival.longitude %>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDwNc99Q2u5MzbjDkJp3kb1u2IH_-ofbBk&callback=initMap"
     ></script>
 
+<table class="table table-hover">
+  <thead>
+    <tr>
+            <th>ID</th>
+            <th>ホテル名</th>
+      <th>ホテル住所</th>
+      <th>ホテル画像数</th>
+        <th>ホテル部屋タイプ数</th>
+    </tr>
+  </thead>
+  <tbody>
+        <% @hotels.each do |hotel|%>
+        <tr>
+          <th><%= hotel.id %></th>
+      <td><%= link_to hotel.name, new_users_user_reservation_path(current_user, params: {festival_id: @festival.id, hotel_id: hotel.id}) %></td>
+      <td><%= hotel.address %></td>
+      <td><%= hotel.hotel_photos.count %></td>
+      <td><%= hotel.room_types.count %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+

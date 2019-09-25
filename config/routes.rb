@@ -17,13 +17,15 @@ Rails.application.routes.draw do
     #get 'withdraw', to: 'users#withdraw', as: 'user/withdraw'
     patch 'users/:id', to: 'users#quit', as: 'user/quit'
   	resources :users, only:[:edit, :update, :show] do
-  	  resources :reservations, except:[:new, :index]
+  	  resources :reservations, except:[:index]
   	    get 'reservations/:id/thanks', to: 'reservations#complete', as: 'reservation_complete'
+        resources :reservation_histories, only:[:show]
     end
     resources :festivals, only:[:index, :show]
     get 'festivals/:id/hotels', to: "hotels#index", as: "hotels"
+    get 'festivals/:id/hotels/:id', to: "hotels#show", as: "hotel"
     resource :favorites, only:[:create, :destroy]
-    resources :reservation_histories, only:[:show]
+
     resources :reviews, only:[:new, :create, :destroy]
   end
 

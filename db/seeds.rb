@@ -7,10 +7,6 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 # Adminを生成
-#Admin.create!(  email: "#{(0...8).map{ ('A'..'Z').to_a[rand(26)] }.join}@seeds.com",
-#				password: 'password',
-#				password_confirmation: 'password'
-#	)
 Admin.create!(  email: "admin@festibo.com",
 				password: 'password',
 				password_confirmation: 'password'
@@ -336,6 +332,15 @@ end
 		name: rand(1..9).to_s + rand(0..1).to_s + rand(1..9).to_s
 	)
 end
+
+# サンプルUserを生成
+User.create(
+	last_name: "sample",
+	first_name: "user",
+	email: "user@festibo.com",
+	password: "password",
+	password_confimation: "password"
+	)
 
 # Userを生成
 27.times do |n|

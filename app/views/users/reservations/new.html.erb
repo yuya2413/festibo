@@ -36,6 +36,11 @@
 			<td>
     			<% room_type.rooms.each do |room| %>
 	    	        <<%= room.name %>>
+	    	        <%= room.reservations.count %>件の予約
+	    	        <% room.reservations.each do |reservation| %>
+	    	            <%= reservation.start_date %> ~ 
+	    	            <%= reservation.end_date %> ///
+	    	        <% end %>
 		        <% end %>
 		    </td>
 　　　　　</tr>

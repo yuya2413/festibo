@@ -12,22 +12,11 @@ class Users::ReservationsController < ApplicationController
   def new
     @hotel = Hotel.find(params[:hotel_id])
     @festival = Festival.find(params[:festival_id])
-    #@room = Room.find(params[:room_id])
     if params[:start_date].present? && params[:end_date].present?
       start_date = Date.parse(params[:start_date])
       end_date = Date.parse(params[:end_date])
       #@reservationは入力したstart,end_dateに重複する他の予約として定義
-      @reservation = Reservation.where('start_date <= ? or end_date >= ?', :start_date, :end_date).find_by(hotel_id: params[:hotel_id])
-      #その予約を持つ@roomを定義
-      #@rooms = Room.where.not(reservatiroom_id: @room_id)(@reservation)
-      @room = @reservation.rooms
-      @room_id = @reservation.room.id
-      @room = Room.where.not(room_id: @room_id)
-      #@room以外のroomを表示
-      #そしたら表示されたroomは予約可能ということ
-      #@rooms = @reservation.rooms
-      #@rooms = Room.where.not(room_id: @room_id)
-      #検索後のホテルと祭りのパラメータ保持
+      @rooms = Room.joins(:reservation).where.not('start_date <= ? or end_date >= ?', :start_date, :end_date)
     end
   end
   def create

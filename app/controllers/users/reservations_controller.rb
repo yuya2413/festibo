@@ -10,6 +10,7 @@ class Users::ReservationsController < ApplicationController
   end
 
   def new
+    @reservation = Reservation.new
     @hotel = Hotel.find(params[:hotel_id])
     @festival = Festival.find(params[:festival_id])
     if params[:start_date].present? && params[:end_date].present?
@@ -20,15 +21,19 @@ class Users::ReservationsController < ApplicationController
     end
   end
   def create
-    reservation.user_id = user.id
-    reservation.festival_id = festival.id
-    reservation.room_id = room.id
-    reservation.save
-    redirect_to users_user_reservation_complete_path(@user)
+    @reservation = Reservation.new(reservation_params)
+    nights = (@reservation.end_date - @reservation.start_date).to_i
+    charge = @reservation.room.room_type.charge
+    @reservation.total_charge = charge * nights
+    @reservation.user_id = current_user.id
+    @reservation.id = params[:id]
+    @reservation.save
+    redirect_to users_user_reservation_complete_path(current_user, @reservation)
   end
 
 
   def complete
+    @reservation = Reservation.find(params[:id])
   end
 
 

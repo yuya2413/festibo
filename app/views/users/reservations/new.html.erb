@@ -7,6 +7,7 @@
 ユーザEmail：<%= current_user.email %><br>
 
 <!--空室検索-->
+<空室検索欄予定、今は動かない>
 <%= form_tag(new_users_user_reservation_path(current_user, params: {festival_id: @festival.id, hotel_id: @hotel.id}), :method => 'get') do %>
 	<%= date_field_tag 'start_date', include_blank: "チェックイン日", class:"btn btn-default dropdown-toggle"%>
 	<%= date_field_tag 'end_date', include_blank: "チェックアウト日", class:"btn btn-default dropdown-toggle"%>
@@ -15,7 +16,16 @@
     <%= submit_tag 'Search' %>
 <% end %>
 <!--以上、空室検索-->
+<!---->
+予約日付
+<%= form_for(@reservation, url: users_user_reservations_path) do |f| %>
+  <%= f.date_field :start_date %>
+  <%= f.date_field :end_date %>
+  <%= f.hidden_field :festival_id, :value =>  @festival.id %>
+  <%= f.submit "予約する" %>
 
+
+<!---->
 <table class="table table-hover">
 	<thead>
 		<tr>
@@ -35,7 +45,8 @@
 			<td><%= room_type.rooms.count %></td>
 			<td>
     			<% room_type.rooms.each do |room| %>
-	    	        <<%= room.name %>>
+    			    <label><%= f.radio_button :room_id, room.id %>
+	    	        <<%= room.name %>></label>
 	    	        <%= room.reservations.count %>件の予約
 	    	        <% room.reservations.each do |reservation| %>
 	    	            <%= reservation.start_date %> ~ 
@@ -47,3 +58,4 @@
 		<% end %>
 	</tbody>
 </table>
+<% end %>

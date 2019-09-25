@@ -1,2 +1,21 @@
 <h1>Users::Reservations#complete</h1>
-<p>Find me in app/views/users/reservations/complete.html.erb</p>
+<p>ご予約ありがとうございます</p>
+
+予約ID：<%= @reservation.id %><br>
+ユーザ情報：<br>
+<%= @reservation.user.last_name %>
+<%= @reservation.user.first_name %>
+<%= @reservation.user.email %><br>
+祭り情報：<br>
+<%= @reservation.festival.name %>
+<%= @reservation.festival.address %><br>
+ホテル情報：<br>
+<%= @reservation.room.room_type.hotel.name %>
+<%= @reservation.room.room_type.hotel.address %><br>
+予約内容：<br>
+チェックイン：<%= @reservation.start_date %>
+チェックアウト：<%= @reservation.end_date %>
+=><%= (@reservation.end_date - @reservation.start_date).to_i %>泊<br>
+<%= @reservation.room.room_type.name%><br>
+一泊料金：¥<%= @reservation.room.room_type.charge %>
+合計料金：¥<%= @reservation.total_charge %>

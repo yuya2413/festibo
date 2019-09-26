@@ -1,5 +1,4 @@
 class Users::HotelsController < ApplicationController
-    before_action :authenticate_user!
   def index
   	@festival = Festival.find(params[:id])
   	@hotels = Hotel.all

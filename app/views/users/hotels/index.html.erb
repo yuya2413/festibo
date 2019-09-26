@@ -53,15 +53,19 @@ longitude:<%= @festival.longitude %>
     </tr>
   </thead>
   <tbody>
-        <% @hotels.each do |hotel|%>
-        <tr>
-          <th><%= hotel.id %></th>
-      <td><%= link_to hotel.name, new_users_user_reservation_path(current_user, params: {festival_id: @festival.id, hotel_id: hotel.id}) %></td>
-      <td><%= hotel.address %></td>
-      <td><%= hotel.hotel_photos.count %></td>
-      <td><%= hotel.room_types.count %></td>
-    </tr>
-    <% end %>
+      <% @hotels.each do |hotel|%>
+      <tr>
+        <th><%= hotel.id %></th>
+        <% if user_signed_in? %>
+          <td><%= link_to hotel.name, new_users_user_reservation_path(current_user, params: {festival_id: @festival.id, hotel_id: hotel.id}) %></td>
+        <% else %>
+          <td><%= hotel.name %></td>
+        <% end %>
+        <td><%= hotel.address %></td>
+        <td><%= hotel.hotel_photos.count %></td>
+        <td><%= hotel.room_types.count %></td>
+      </tr>
+      <% end %>
   </tbody>
 </table>
 

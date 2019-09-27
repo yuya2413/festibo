@@ -1,0 +1,6 @@
+ <div class='nested-fields'>
+    <%= f.label :hotel_photos, "画像" %>
+    <%= attachment_image_tag @hotel_photo, :image, :fill, 60, 60 %>
+    <%= f.attachment_field :image %>
+    <%= link_to_remove_association "画像を削除", f, class:"btn btn-danger" %>
+</div>

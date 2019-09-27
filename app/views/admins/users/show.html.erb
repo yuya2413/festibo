@@ -1,0 +1,8 @@
+<h1>ユーザ詳細ページ</h1>
+"ID"<%= @user.id %>
+"姓"<%= @user.last_name %>
+"名"<%= @user.first_name %>
+"ステータス"<%= @user.status %>
+"メアド"<%= @user.email %>
+
+<%= link_to "退会", admins_user_quit_path(@user), method: :patch, data: {confirm: "このユーザを強制的に退会させますか？"} %>

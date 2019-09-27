@@ -1,0 +1,90 @@
+<h1>Users::Hotels#show<%= @info.hotel.name %></h1>
+<h1>Users::Hotels#show<%= @info.festival.name %></h1>
+<table class="table table-hover">
+	<thead>
+		<tr>
+            <th>ホテル名</th>
+			<th>ホテル住所</th>
+			<th>latitude</th>
+			<th>longitude</th>
+		</tr>
+	</thead>
+	<tbody>
+        <tr>
+			<td><%= @hotel.name %></td>
+			<td><%= @hotel.address %></td>
+			<td><%= @hotel.latitude %></td>
+			<td><%= @hotel.longitude %></td>
+		</tr>
+		<tr>
+			<% @hotel.hotel_photos.each do |hotel_photo| %>
+			<td><%= attachment_image_tag hotel_photo, :image, style: "width: 100px; height: 100px;" %></td>
+			<% end %>
+		</tr>
+	</tbody>
+</table>
+<table class="table table-hover">
+	<thead>
+		<tr>
+			<th>部屋タイプ</th>
+			<th>人数</th>
+			<th>一泊あたりの料金</th>
+			<th>部屋数</th>
+			<th>部屋名</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @hotel.room_types.each do |room_type| %>
+        <tr>
+			<td><%= room_type.name %></td>
+			<td><%= room_type.people_count %></td>
+			<td><%= room_type.charge %></td>
+			<td><%= room_type.rooms.count %></td>
+			<td>
+    			<% room_type.rooms.each do |room| %>
+	    	        <<%= room.name %>>
+		        <% end %>
+		    </td>
+　　　　　</tr>
+		<% end %>
+	</tbody>
+</table>
+
+<!--下記、Google Map表示-->
+<h2>gmap</h2>
+<style>
+#map{
+  height: 400px;
+  width: 400px;
+}
+</style>
+
+    <div id="map"></div>
+    <script>
+    function initMap() {
+    var test ={lat: <%= @hotel.latitude %>, lng: <%= @hotel.longitude%>};
+    var map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 15,
+      center: test
+    });
+    var transitLayer = new google.maps.TransitLayer();
+    transitLayer.setMap(map);
+
+    var contentString = "住所：<%= @hotel.address %>";
+    var infowindow = new google.maps.InfoWindow({
+      content: contentString
+    });
+
+    var marker = new google.maps.Marker({
+      position:test,
+      map: map,
+      title: contentString
+    });
+
+    marker.addListener('click', function() {
+      infowindow.open(map, marker);
+    });
+    }
+    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDwNc99Q2u5MzbjDkJp3kb1u2IH_-ofbBk&callback=initMap"
+    ></script>

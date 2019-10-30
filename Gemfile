@@ -70,3 +70,4 @@ gem 'bootstrap-sass', '~> 3.3.6'
 gem "cocoon"
 gem 'jquery-rails'
 gem 'geocoder'
+gem 'jquery-turbolinks'

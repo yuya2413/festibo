@@ -1,2 +1,27 @@
-<h1>トップページ</h1>
-<%= render 'search_form' %>
+
+<div id="slider">
+	<div id="theTarget">
+		<div id="top-images" style="background-image: url(<%= asset_path "AMEMAN314009_TP_V.jpg" %>)" ></div><!-- ダイナミック -->
+		<div id="top-images" style="background-image: url(<%= asset_path "AMEoyamadds63_TP_V.jpg" %>)" ></div><!-- 踊り -->
+		<div id="top-images" style="background-image: url(<%= asset_path "619omaturiame_TP_V.jpg" %>)" ></div><!-- 奇祭 -->
+		<div id="top-images" style="background-image: url(<%= asset_path "PAK85_takonyakiyatai20130824_TP_V.jpg" %>)" ></div><!-- 出店 -->
+		<div id="top-images" style="background-image: url(<%= asset_path "PAK85_spballsukuishiterusyoune_TP_V.jpg" %>)" ></div><!-- 子供 -->
+		<div id="top-images" style="background-image: url(<%= asset_path "NIS_8452_yodogawanohanabi_TP_V.jpg" %>)" ></div><!-- 花火 -->
+    </div>
+</div>
+
+<div id="top-search">
+	<p class="search-text">祭りを探す</p>
+    <%= form_tag(users_festivals_path, :method => 'get') do %>
+    <div class="search-bar">
+    	<!--options_from_collection_for_select
+		第１引数は表示させるデータ、第２引数は格納される値、第３引数はViewに表示される値-->
+		<span class="date-input" data-text="指定した日付の前後1週間を検索します">
+    	    <%= date_field_tag 'start_date', include_blank: "開催日" %>
+    	</span>
+        <%= select_tag 'prefecture_id', options_from_collection_for_select( Prefecture.all, :id, :name), include_blank: "都道府県", class:"btn btn-default dropdown-toggle", style: "width: 160px; height: 34px; padding: 6px 12px;" %>
+        <%= select_tag 'category_id', options_from_collection_for_select( Category.all, :id, :name), include_blank: "カテゴリー", class:"btn btn-default dropdown-toggle", style: "width: 160px; height: 34px; padding: 6px 12px;" %>
+        <%= button_tag 'Search <span class="glyphicon glyphicon-search"  aria-hidden="true"></span>'.html_safe, :type => "submit", :class =>"btn btn-success btn-s-md", style: "width: 160px;" %>
+        <% end %>
+    </div>
+</div>

@@ -1,26 +1,41 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Festibo</title>
+    <title>FesTibo</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link href="https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c&display=swap" rel="stylesheet">
   </head>
 
   <body>
+    <header class="clearfix">
+      <%= link_to root_path, data: {"turbolinks" => false} do %>
+      <div class="header-logo" style="background-image: url(<%= asset_path "logo.png" %>)"></div>
+      <% end %>
+      <div class="header-nav">
         <!--URLの先頭に'admin'があれば'true'-->
-    <% if request.fullpath.match?(/^\/admins\/*/) %>
-      <%= render "/layouts/admins_header" %>
-    <% else %>
-      <%= render "/layouts/users_header" %>
-    <% end %>
+        <% if request.fullpath.match?(/^\/admins\/*/) %>
+          <%= render "/layouts/admins_header" %>
+        <% else %>
+          <%= render "/layouts/users_header" %>
+        <% end %>
+        </div>
 
-    <% flash.each do |message_type, message| %>
-      <%= content_tag(:div, message, class: "alert alert-#{message_type}") %>
-       <!-- 上記と同義 <div class="alert alert-<%= message_type %>"><%= message %></div> -->
-    <% end %>
+        <% flash.each do |message_type, message| %>
+          <%= content_tag(:div, message, class: "alert alert-#{message_type}") %>
+          <!-- 上記と同義 <div class="alert alert-<%= message_type %>"><%= message %></div> -->
+        <% end %>
+
+    </header>
+
     <%= yield %>
+
+    <footer>
+      <p>Copyright © FesTibo All Rights Reserved.</p>
+    </footer>
+
   </body>
 </html>

@@ -21,20 +21,20 @@ a:visited {
 	color: white;
 }
 a:hover {
-    color:#FF0099;
+  color:#FF0099;
 }
 a:active {
-    color:#33CC00;
+  color:#33CC00;
 }
 
 p {
-    font-family: 'M PLUS Rounded 1c', sans-serif;
+  font-family: 'M PLUS Rounded 1c', sans-serif;
 }
 
 .clearfix::after {
-    content: "";
-    display: block;
-    clear: both;
+  content: "";
+  display: block;
+  clear: both;
 }
 
 
@@ -52,17 +52,17 @@ header {
 }
 
 .header-logo {
-    width: 200px;
-    height: 80px;
-    float: left;
-  	background-size: 200px 80px;
-  	margin-top: 10px;
+  width: 200px;
+  height: 80px;
+  float: left;
+	background-size: 200px 80px;
+	margin-top: 10px;
 }
 
 
 .header-nav {
 	float: right;
-    font-color: white;
+  font-color: white;
 }
 
 .header-nav p {
@@ -114,11 +114,11 @@ footer {
 }
 
 input[type="date"] {
-    width: 160px;
-    height: 34px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    padding: 6px 12px;
+  width: 160px;
+  height: 34px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 6px 12px;
 }
 
 /* 下記、日付検索欄のツールチップ */
@@ -131,7 +131,6 @@ input[type="date"] {
   background: #d9edf7;
   border-radius: 0.5em;
 }
-
 .tooltips::after {
   width: 100%;
   content: "";
@@ -143,3 +142,36 @@ input[type="date"] {
   border-left:8px solid #d9edf7;
 }
 /* 以上、ツールチップ */
+
+.about-box {
+  background-color: white;
+  width: 75%;
+  margin: 0 auto;
+  padding-top: 30px;
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-bottom: 50px;
+  border-radius: 4px;
+}
+
+.about-headline {
+  text-align: center;
+  margin-bottom: 50px;
+  text-decoration: underline solid gray;
+}
+
+.about-content {
+  margin-bottom: 50px;
+}
+
+.about-content-left {
+  width: 50%;
+  float: left;
+  font-size: 14px;
+}
+
+.about-content-right {
+  width: 50%;
+  float: right;
+  text-align: right;
+}

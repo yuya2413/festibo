@@ -4,7 +4,7 @@
     <title>FesTibo</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <link href="https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c&display=swap" rel="stylesheet">
@@ -22,12 +22,13 @@
         <% else %>
           <%= render "/layouts/users_header" %>
         <% end %>
+        </div>
 
         <% flash.each do |message_type, message| %>
           <%= content_tag(:div, message, class: "alert alert-#{message_type}") %>
           <!-- 上記と同義 <div class="alert alert-<%= message_type %>"><%= message %></div> -->
         <% end %>
-        </div>
+
     </header>
 
     <%= yield %>

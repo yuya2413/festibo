@@ -1,14 +1,39 @@
   <p>
     <% if user_signed_in? %>
-      <%= link_to "TOP", root_path, data: {"turbolinks" => false} %>
-      <%= link_to "ABOUT", about_path %>
-      <%= link_to "マイページ", users_user_path(current_user) %>
-      <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+      <%= link_to root_path, data: {"turbolinks" => false} do %>
+        <i class="fas fa-home"></i>TOP
+      <% end %>
+      <span>/</span>
+      <%= link_to about_path do %>
+        <i class="fas fa-info"></i>ABOUT
+      <% end %>
+      <span>/</span>
+      <%= link_to users_user_path(current_user) do %>
+        <i class="fas fa-user"></i>マイページ
+      <% end %>
+      <span>/</span>
+      <%= link_to destroy_user_session_path, method: :delete do %>
+        <i class="fas fa-sign-out-alt"></i>ログアウト
+      <% end %>
     <% else %>
-      <%= link_to "TOP", root_path, data: {"turbolinks" => false} %>
-      <%= link_to "ABOUT", about_path %>
-      <%= link_to "ログイン", new_user_session_path %>
-      <%= link_to "新規登録", new_user_registration_path %>
-      <%= link_to "管理者ログイン", new_admin_session_path %>
+      <%= link_to root_path, data: {"turbolinks" => false} do %>
+        <i class="fas fa-home"></i>TOP
+      <% end %>
+      <span>/</span>
+      <%= link_to about_path do %>
+        <i class="fas fa-info"></i>ABOUT
+      <% end %>
+      <span>/</span>
+      <%= link_to new_user_session_path do %>
+        <i class="fas fa-sign-in-alt"></i>ログイン
+      <% end %>
+      <span>/</span>
+      <%= link_to new_user_registration_path do %>
+        <i class="fas fa-user-plus"></i>新規登録
+      <% end %>
+      <span>/</span>
+      <%= link_to new_admin_session_path do %>
+      <i class="fas fa-tools"></i>管理者ログイン
+      <% end %>
     <% end %>
   </p>

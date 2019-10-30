@@ -17,6 +17,16 @@
 @import "bootstrap";
 
 
+a:visited {
+	color: white;
+}
+a:hover {
+    color:#FF0099;
+}
+a:active {
+    color:#33CC00;
+}
+
 p {
     font-family: 'M PLUS Rounded 1c', sans-serif;
 }
@@ -52,7 +62,21 @@ header {
 
 .header-nav {
 	float: right;
+    font-color: white;
+}
 
+.header-nav p {
+	font-size: 15px;
+}
+
+.header-nav i {
+	margin-right: 5px;
+}
+
+
+.header-nav span {
+	margin-left: 10px;
+	margin-right: 10px;
 }
 
 footer {

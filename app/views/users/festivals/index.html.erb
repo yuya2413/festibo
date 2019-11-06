@@ -1,6 +1,10 @@
-<h1>祭り検索結果</h1>
+<div class="main clearfix">
+  <h1>祭り検索結果</h1>
+  <%= render 'search_form' %>
+  <div class="main-right">
 
-<%= render 'search_form' %>
+
+
 
 
 <table class="table table-hover">
@@ -11,6 +15,7 @@
 			<th>祭り開催地</th>
 			<th>開催初日</th>
 			<th>開催終了日</th>
+			<th>画像</th>
 			<th>value1</th>
 			<th>value2</th>
 			<th>value3</th>
@@ -24,11 +29,22 @@
 	<tbody>
         <% @festivals.each do |festival|%>
         <tr>
-			<td><a href="/users/festivals/<%= festival.id%>"><%= festival.name %></td>
+			<td><a href="/users/festivals/<%= festival.id%>"><%= festival.name %></a></td>
 			<td><%= festival.detail %></td>
 			<td><%= festival.address %></td>
 			<td><%= festival.start_date %></td>
 			<td><%= festival.end_date %></td>
+
+
+			<% if festival.festival_photos.present? %>
+
+			  <td><% festival.festival_photos.each do |festival_photo|%>
+			  	<%= attachment_image_tag festival_photo, :image, style: "width: 100px; height: 100px;" %>
+			  	<% end %>
+			  	</td>
+            <% else %>
+              <td><%= image_tag "no_image.png", style: "width: 100px; height: 100px;" %></td>
+			<% end %>
 			<td><%= festival.value_1 %></td>
 			<td><%= festival.value_2 %></td>
 			<td><%= festival.value_3 %></td>
@@ -45,3 +61,8 @@
 		<% end %>
 	</tbody>
 </table>
+
+  </div>
+</div>
+
+

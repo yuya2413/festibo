@@ -27,19 +27,15 @@ a:active {
   color:#33CC00;
 }
 
-p {
-  font-family: 'M PLUS Rounded 1c', sans-serif;
-}
-
 .clearfix::after {
   content: "";
   display: block;
   clear: both;
 }
 
-
 body {
 	background-color: #120a33;
+  font-family: 'M PLUS Rounded 1c', sans-serif;
 }
 
 
@@ -59,15 +55,12 @@ header {
 	margin-top: 10px;
 }
 
-
 .header-nav {
 	float: right;
   font-color: white;
+  font-size: 15px;
 }
 
-.header-nav p {
-	font-size: 15px;
-}
 
 .header-nav i {
 	margin-right: 5px;
@@ -121,8 +114,8 @@ input[type="date"] {
   padding: 6px 12px;
 }
 
-/* 下記、日付検索欄のツールチップ */
-.tooltips {
+/* 下記、トップ日付検索欄のツールチップ */
+.top-tooltips {
   position: absolute;
   top: 3em;
   left: 3em;
@@ -131,7 +124,7 @@ input[type="date"] {
   background: #d9edf7;
   border-radius: 0.5em;
 }
-.tooltips::after {
+.top-tooltips::after {
   width: 100%;
   content: "";
   display: block;
@@ -154,9 +147,10 @@ input[type="date"] {
   padding-bottom: 50px;
 }
 
-.page-title {
+h1 {
   text-align: center;
   text-decoration: underline solid gray;
+  font-weight: bold;
 }
 
 .about-content {
@@ -168,6 +162,13 @@ input[type="date"] {
   width: 50%;
   float: left;
   font-size: 14px;
+}
+
+.how-to-use {
+  font-weight: bold;
+}
+.how-to-use p {
+  text-decoration: underline solid gray;
 }
 
 .about-content-right {
@@ -199,7 +200,7 @@ input[type="email"], input[type="password"] {
   border: 1px solid #ccc;
   border-radius: 4px;
   padding: 6px 12px;
-  margin-bottom: 2px;
+  margin-bottom: 1px;
 }
 
 input[type="email"] {
@@ -209,4 +210,61 @@ input[type="email"] {
 .sign-action {
   margin: 15px auto;
   text-align: center;
+}
+
+.main {
+  background-color: lightgreen;
+  width: 100%;
+  padding: 0 5%;
+}
+
+.main h1 {
+  background-color: brown;
+  text-align: center;
+  margin: 20px auto;
+}
+
+.main-left-search-bar {
+  width: 20%;
+  float: left;
+  text-align: center;
+  background-color: white;
+  border-radius: 5px;
+  position: relative;
+}
+
+.main-left-search-bar p {
+  font-size: 20px;
+  margin-top: 10px;
+}
+
+/* 下記、祭りページ日付検索欄のツールチップ */
+.festival-tooltips {
+  width: 90%;
+  position: absolute;
+  top: 0.5em;
+  left: 0;
+  right: 0;
+  margin: auto;
+  padding: 6px 12px;
+  color: #31708f;
+  background: #d9edf7;
+  border-radius: 0.5em;
+}
+.festival-tooltips::after {
+  width: 100%;
+  content: "";
+  display: block;
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  border-bottom: 10px solid transparent;
+  border-left: 8px solid #d9edf7;
+}
+/* 以上、ツールチップ */
+
+.main-right {
+  background-color: lightyellow;
+  width: 75%;
+  float: right;
 }

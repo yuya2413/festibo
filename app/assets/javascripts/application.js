@@ -49,13 +49,23 @@ $("#theTarget").skippr({
 });
 });
 
-$(".date-input").on({
+$(".top-date-input").on({
   'mouseenter':function(){
     var text = $(this).attr('data-text');
-    $(this).append('<span class="tooltips">'+text+'</span>');
+    $(this).append('<span class="top-tooltips">'+text+'</span>');
   },
   'mouseleave':function(){
-    $(this).find(".tooltips").remove();
+    $(this).find(".top-tooltips").remove();
+  }
+});
+
+$(".festival-date-input").on({
+  'mouseenter':function(){
+    var text = $(this).attr('data-text');
+    $(this).append('<span class="festival-tooltips">'+text+'</span>');
+  },
+  'mouseleave':function(){
+    $(this).find(".festival-tooltips").remove();
   }
 });
 

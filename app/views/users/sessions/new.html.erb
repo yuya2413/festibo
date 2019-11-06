@@ -1,26 +1,24 @@
-<h2>ログイン</h2>
-
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
-
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+<div class="sign-background">
+  <div class="sign-box">
+    <div class="page-title">
+      <h1><p><b>ログイン</b></p></h1>
     </div>
-  <% end %>
-
-  <div class="actions">
-    <%= f.submit "Log in" %>
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    <div class="field">
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "メールアドレス" %>
+    </div>
+    <div class="field">
+    <%= f.password_field :password, autocomplete: "current-password", placeholder: "パスワード" %>
+    </div>
+    <% if devise_mapping.rememberable? %>
+      <%= f.check_box :remember_me %>
+      <%= f.label :remember_me, "保存する", style: "font-weight:normal;" %>
+    <% end %>
+    <div class="sign-action">
+      <%= f.submit "ログイン", class: "btn btn-success btn-s-md", style: "width: 75%;" %>
+    </div>
+    <% end %>
+    <%= link_to "パスワードを忘れた方", new_password_path(resource_name), style: "color: #0066cb; text-decoration: underline solid;" %>
   </div>
-<% end %>
+</div>
 
-<%= render "devise/shared/links" %>

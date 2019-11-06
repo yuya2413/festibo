@@ -20,22 +20,23 @@ categories.each { |w| Category.create!(name: w) }
 # Favoriteを生成
 
 # FestivalPhotoを生成
-27.times do |n|
-	festival_id = rand(1..27)
-	image_id = ["AMEMAN314011_TP_V.jpg",
-		"anjyuomaturiIMG_1546_TP_V4.jpg",
-		"IMARI0I9A0040_TP_V4.jpg",
-		"IMARI20160807152719_TP_V4.jpg",
-	    "IMARIB20160807430416_TP_V.jpg",
-	    "PAK85_spballsukuishiterusyoune_TP_V.jpg",
-	    "PKST0I9A2332_TP_V.jpg",
-	    "PKST0I9A2587_TP_V.jpg"
-	]
-	FestivalPhoto.create!(
-		festival_id: festival_id,
-		image_id: image_id.sample
-		)
-end
+# Refile::IncvalidIDのためコメントアウト
+#27.times do |n|
+#	festival_id = rand(1..27)
+#	image_id = ["AMEMAN314011_TP_V.jpg",
+#		"anjyuomaturiIMG_1546_TP_V4.jpg",
+#		"IMARI0I9A0040_TP_V4.jpg",
+#		"IMARI20160807152719_TP_V4.jpg",
+#	    "IMARIB20160807430416_TP_V.jpg",
+#	    "PAK85_spballsukuishiterusyoune_TP_V.jpg",
+#	    "PKST0I9A2332_TP_V.jpg",
+#	    "PKST0I9A2587_TP_V.jpg"
+#	]
+#	FestivalPhoto.create!(
+#		festival_id: festival_id,
+#		image_id: image_id.sample
+#		)
+#end
 
 # Festivalを生成
 27.times do |n|
@@ -265,25 +266,26 @@ Hotel.create(name: "ホテル玉置&浩二",
 
 
 # HotelPhotoを生成
-54.times do |n|
-	hotel_id = rand(1..27)
-	image_id = [
-		"gunkanjimaFTHG4531_TP_V.jpg",
-		"hiroto_htmachi_TP_V.jpg",
-		"KAI427010_TP_V.jpg",
-		"KAI427012_TP_V.jpg", "MSA0I9A5161_TP_V.jpg",
-		"MZ18063DSCF4751_TP_V.jpg",
-		"SAYAPAKU4851_TP_V.jpg",
-		"SAYAPAKU5460_TP_V.jpg",
-		"tokunoshimaIMGL4324_TP_V.jpg",
-		"YAMA_DSC0929_TP_V.jpg",
-		"ZUhaikyoDSC_1190_TP_V.jpg"
-	]
-	HotelPhoto.create!(
-		hotel_id: hotel_id,
-		image_id: image_id.sample
-		)
-end
+# Refile::IncvalidIDのためコメントアウト
+#54.times do |n|
+#	hotel_id = rand(1..27)
+#	image_id = [
+#		"gunkanjimaFTHG4531_TP_V.jpg",
+#		"hiroto_htmachi_TP_V.jpg",
+#		"KAI427010_TP_V.jpg",
+#		"KAI427012_TP_V.jpg", "MSA0I9A5161_TP_V.jpg",
+#		"MZ18063DSCF4751_TP_V.jpg",
+#		"SAYAPAKU4851_TP_V.jpg",
+#		"SAYAPAKU5460_TP_V.jpg",
+#		"tokunoshimaIMGL4324_TP_V.jpg",
+#		"YAMA_DSC0929_TP_V.jpg",
+#		"ZUhaikyoDSC_1190_TP_V.jpg"
+#	]
+#	HotelPhoto.create!(
+#		hotel_id: hotel_id,
+#		image_id: image_id.sample
+#		)
+#end
 
 # RoomTypeを生成
 81.times do |n|

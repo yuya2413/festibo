@@ -1,12 +1,16 @@
-  <p>
+
     <% if admin_signed_in? %>
       <%= link_to "ユーザ一覧", admins_users_path %>
+      <span>/</span>
       <%= link_to "祭り一覧", admins_festivals_path %>
+      <span>/</span>
       <%= link_to "ホテル一覧", admins_hotels_path %>
+      <span>/</span>
       <%= link_to "予約一覧", admins_reservations_path %>
+      <span>/</span>
       <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
     <% else %>
       <%= link_to "ユーザログイン", new_user_session_path %>
+      <span>/</span>
       <%= link_to "ユーザTOP", root_path %>
     <% end %>
-  </p>

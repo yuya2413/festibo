@@ -2,56 +2,40 @@
   <h1>祭り検索結果</h1>
   <%= render 'search_form' %>
   <div class="main-right">
-
-
-
   	<% @festivals.each do |festival|%>
   	<div class="festival-container">
-
-
-
-
-  	    <div class="festival-container-image">
-  	  	  <% if festival.festival_photos.present? %>
-  	        <% festival.festival_photos.each do |festival_photo|%>
-		      <%= attachment_image_tag festival_photo, :image, class: "festival-image" %>
-	        <% end %>
-          <% else %>
-            <%= image_tag "no_image.png", class: "festival-image" %>
+  	  <%= link_to "", users_festival_path(festival), class: "festival-container-link" %>
+  	  <div class="festival-container-image">
+  	  	<% if festival.festival_photos.present? %>
+  	      <% festival.festival_photos.each do |festival_photo|%>
+		    <%= attachment_image_tag festival_photo, :image, class: "festival-image" %>
 	      <% end %>
-	    </div>
-
-
-    	<div class="festival-container-content">
-	  	  <a class="festival-name" href="/users/festivals/<%= festival.id%>"><%= festival.name %></a>
-    	  <div class="festival-period">
-	  	    <%= festival.start_date %> ~ <%= festival.end_date %>
-	  	  </div>
-	  	  <div class="festival-prefecture">
-	  	    <%= festival.prefecture.name %>
-	  	  </div>
-	  	  <div class="festival-categories">
-	  	    <% festival.festivals_categories.each do |festivals_category| %>
-	  	    <span class="festival-categories-each">
-			  <%= festivals_category.category.name %>
-			  <% end %>
-		    </span>
-		  </div>
-		  <div class="festival-detail">
-		    <%= festival.detail %>
-		  </div>
-	    </div>
-
-
-
-
+        <% else %>
+          <%= image_tag "no_image.png", class: "festival-image" %>
+	    <% end %>
+	  </div>
+      <div class="festival-container-content">
+	  	<div class="festival-name"><%= festival.name %></div>
+        <div class="festival-period">
+    	  <i class="far fa-calendar-alt"></i>
+	  	  <span class="festival-period-date"><%= festival.start_date %></span>
+	  	  <span style="margin: 0 1%;"> ~  </span>
+	  	  <span class="festival-period-date"><%= festival.end_date %></span>
+	  	</div>
+	  	<div class="festival-prefecture">
+	  	  <i class="fas fa-thumbtack"></i>
+	  	  <%= festival.prefecture.name %>
+	  	</div>
+	  	<div class="festival-categories">
+	  	  <i class="fas fa-tags"></i>
+	  	  <% festival.festivals_categories.each do |festivals_category| %>
+	  	  <span class="festival-categories-each"><%= festivals_category.category.name %></span>
+		  <% end %>
+		</div>
+		<div class="festival-detail"><%= festival.detail %></div>
+	  </div>
     </div>
     <% end %>
-
-
-
-
-
   </div>
 </div>
 

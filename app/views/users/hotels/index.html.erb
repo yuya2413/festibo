@@ -50,6 +50,7 @@ longitude:<%= @festival.longitude %>
       <th>ホテル住所</th>
       <th>ホテル画像数</th>
         <th>ホテル部屋タイプ数</th>
+        <th>都道府県ID</th>
     </tr>
   </thead>
   <tbody>
@@ -64,6 +65,7 @@ longitude:<%= @festival.longitude %>
         <td><%= hotel.address %></td>
         <td><%= hotel.hotel_photos.count %></td>
         <td><%= hotel.room_types.count %></td>
+        <td><%= hotel.prefecture_id %></td>
       </tr>
       <% end %>
   </tbody>

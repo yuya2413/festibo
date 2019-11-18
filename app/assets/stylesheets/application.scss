@@ -355,17 +355,17 @@ input[type="email"] {
 }
 
 
-.festival-show-page-name {
+.festival-show-page-name, .hotel-index-page-name {
   font-size: 130%;
   text-decoration: none;
   font-style: italic;
 }
 
 
-.festival-show-container {
+.festival-show-container, .hotel-index-container {
   background-color: burlywood;
   border-radius: 5px;
-  padding: 0 5%;
+  padding: 1% 5%;
 }
 
 .festival-name.show-page {
@@ -441,3 +441,30 @@ h3 i {
 .btn.show-page {
   font-size: 150%;
 }
+
+.hotel-index-map, .hotel-recommendation {
+  margin-top: 5%;
+  padding-left: 3%;
+}
+
+.hotel-index-festival-address {
+  text-align: right;
+  margin-right: 5%;
+  margin-bottom: 0.5%;
+}
+
+.hotel-index-festival-address i {
+  margin-right: 0.5%
+}
+
+.hotel-index-festival-address span {
+  font-style: italic;
+}
+
+.hotel-index-table {
+ width: 85%;
+ margin: 2% auto;
+ margin-bottom: 8%;
+}
+
+

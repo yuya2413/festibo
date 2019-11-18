@@ -20,32 +20,32 @@
 	  	  <% @festival.festivals_categories.each do |festivals_category| %>
 	  	  <span class="festival-categories-each show-page"><%= festivals_category.category.name %></span>
 		  <% end %>
-		</span>
-	  </div>
+		  </span>
+	    </div>
   	  <div class="festival-show-container-image">
   	  	<% if @festival.festival_photos.present? %>
   	      <% @festival.festival_photos.each do |festival_photo|%>
-		    <%= attachment_image_tag festival_photo, :image, class: "festival-show-image" %>
-	      <% end %>
+		        <%= attachment_image_tag festival_photo, :image, class: "festival-show-image" %>
+	        <% end %>
         <% else %>
           <%= image_tag "no_image.png", class: "festival-show-image" %>
-	    <% end %>
-	  </div>
-	  <div class="festival-detail show-page">
-	  	<h3><i class="far fa-file-alt"></i>説明</h3>
-	  	<div class="festival-detail-text"><%= @festival.detail %></div>
-	  </div>
-	  <div class="festival-address">
-	  	<h3><i class="fas fa-map-marker-alt"></i>開催地</h3>
-	  	<div class="festival-address-detail">
-	  	  <span class="festival-address-text"><%= @festival.address %></span>
-	  	  <%= link_to users_hotels_path(@festival) do %>
-	  	  <button class="btn btn-primary show-page">
-	  		<i class="fas fa-check"></i>近くのホテルをチェック
-	      </button>
-	  	  <% end %>
-	  	</div>
-	    <!-- 下記、Google Map表示 -->
+	      <% end %>
+	    </div>
+	    <div class="festival-detail show-page">
+	  	  <h3><i class="far fa-file-alt"></i>説明</h3>
+	  	  <div class="festival-detail-text"><%= @festival.detail %></div>
+	    </div>
+	    <div class="festival-address">
+	  	  <h3><i class="fas fa-map-marker-alt"></i>開催地</h3>
+	  	  <div class="festival-address-detail">
+	  	    <span class="festival-address-text"><%= @festival.address %></span>
+  	  	  <%= link_to users_hotels_path(@festival) do %>
+	    	  <button class="btn btn-primary show-page">
+	      		<i class="fas fa-check"></i>近くのホテルをチェック
+	        </button>
+	  	    <% end %>
+	  	  </div>
+	      <!-- 下記、Google Map表示 -->
         <style>
           #map{
           	height: 400px;

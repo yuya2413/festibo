@@ -39,7 +39,7 @@ class Festival < ApplicationRecord
   #end
 
   def start_end_check
-    errors.add(:end_date, "の日付を正しく記入してください。") unless
+    errors.add(:end_date, "の日付を正しく入力してください") unless
     self.start_date < self.end_date
   end
 

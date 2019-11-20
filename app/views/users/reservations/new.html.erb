@@ -1,61 +1,105 @@
-<h1>Users::Reservations#new</h1>
-<p>Find me in app/views/users/reservations/new.html.erb</p>
-祭り名：<%= @festival.name%><br>
-ホテル名：<%= @hotel.name %><br>
-ユーザ姓：<%= current_user.last_name %><br>
-ユーザ名：<%= current_user.first_name %><br>
-ユーザEmail：<%= current_user.email %><br>
-
-<!--空室検索-->
-<空室検索欄予定、今は動かない>
-<%= form_tag(new_users_user_reservation_path(current_user, params: {festival_id: @festival.id, hotel_id: @hotel.id}), :method => 'get') do %>
-	<%= date_field_tag 'start_date', include_blank: "チェックイン日", class:"btn btn-default dropdown-toggle"%>
-	<%= date_field_tag 'end_date', include_blank: "チェックアウト日", class:"btn btn-default dropdown-toggle"%>
-	<%= hidden_field_tag :festival_id, @festival.id %>
-	<%= hidden_field_tag :hotel_id, @hotel.id %>
-    <%= submit_tag 'Search' %>
-<% end %>
-<!--以上、空室検索-->
-<!---->
-予約日付
-<%= form_for(@reservation, url: users_user_reservations_path) do |f| %>
-  <%= f.date_field :start_date %>
-  <%= f.date_field :end_date %>
-  <%= f.hidden_field :festival_id, :value =>  @festival.id %>
-  <%= f.submit "予約する" %>
-
-
-<!---->
-<table class="table table-hover">
-	<thead>
-		<tr>
-			<th>部屋タイプ</th>
+<div class="main clearfix">
+  <h1>ホテル予約手続き</h1>
+  <div class="reservation-new-container clearfix">
+  	<div class="reservation-form">
+  	<%= form_for(@reservation, url: users_user_reservations_path) do |f| %>
+      <%= f.hidden_field :festival_id, :value =>  @festival.id %>
+      <h3>1.部屋を選択</h3>
+      <i class="fas fa-bed"></i><%= @hotel.name %>
+      <table class="table">
+	    <thead>
+		  <tr>
+		    <th>部屋タイプ</th>
 			<th>人数</th>
-			<th>一泊あたりの料金</th>
-			<th>部屋数</th>
+			<th style="padding-left: 5%;">一泊料金</th>
 			<th>部屋名</th>
-		</tr>
-	</thead>
-	<tbody>
+		  </tr>
+	    </thead>
+	    <tbody>
 		<% @hotel.room_types.each do |room_type| %>
         <tr>
-			<td><%= room_type.name %></td>
-			<td><%= room_type.people_count %></td>
-			<td><%= room_type.charge %></td>
-			<td><%= room_type.rooms.count %></td>
-			<td>
-    			<% room_type.rooms.each do |room| %>
-    			    <label><%= f.radio_button :room_id, room.id %>
-	    	        <<%= room.name %>></label>
-	    	        <%= room.reservations.count %>件の予約
-	    	        <% room.reservations.each do |reservation| %>
-	    	            <%= reservation.start_date %> ~ 
-	    	            <%= reservation.end_date %> ///
-	    	        <% end %>
-		        <% end %>
-		    </td>
-　　　　　</tr>
+		  <td style="padding-left: 2%;"><%= room_type.name %></td>
+		  <td style="text-align: center;"><%= room_type.people_count %></td>
+		  <td style="text-align: right; padding-right: 5%;"><%= converting_to_jpy(room_type.charge) %></td>
+	      <td style="padding-left: 2%; width: 50%;">
+    	  <% room_type.rooms.each do |room| %>
+    	    <label style="margin-right: 5%;">
+    	      <%= f.radio_button :room_id, room.id %>
+	    	  <%= room.name %>
+	    	</label>
+		   <% end %>
+		  </td>
+		</tr>
 		<% end %>
-	</tbody>
-</table>
-<% end %>
+	    </tbody>
+      </table>
+      <div>
+      	<h3>2.日程を選択</h3>
+      	<i class="far fa-calendar-alt"></i><%= @festival.name %><span style="margin-right:1%;">:</span><%= @festival.start_date %> ~ <%= @festival.end_date %>
+      </div>
+      <div class="reservation-date">
+      	<span>
+      	  <label class="reservation-date checkin">チェックイン<br>
+      	  	<%= f.date_field :start_date %>
+      	  </label>
+      	</span>
+      	<span>
+      	  <label class="reservation-date checkout">チェックアウト<br>
+      	  	<%= f.date_field :end_date %>
+      	  </label>
+      	</span>
+      	<span>
+      	<%= f.submit "予約する", :class =>"btn btn-success btn-s-md", style: "width: 160px; margin: 15px auto;" %>
+      	</span>
+      </div>
+    <% end %>
+    </div>
+    <!--下記、Google Map表示-->
+    <style>
+    #map{
+      height: 550px;
+      width: 45%;
+      float: right;
+    }
+    </style>
+    <div id="map"></div>
+    <script>
+      function initMap() {
+        var hotelLatLng = new google.maps.LatLng(<%= @hotel.latitude %>, <%= @hotel.longitude %>);
+        var festivalLatLng = new google.maps.LatLng(<%= @festival.latitude %>, <%= @festival.longitude %>);
+        var map = new google.maps.Map(document.getElementById('map'), {
+          center: hotelLatLng,
+          zoom: 15,
+        });
+        var transitLayer = new google.maps.TransitLayer();
+        transitLayer.setMap(map);
+        var hotelMarker = new google.maps.Marker({
+            position: hotelLatLng,
+            map: map,
+        });
+        var hotelContent = '<div style="color: #0000ee; font-weight: bold;"><%= @hotel.name %></div><div><%= @hotel.address %></div>';
+        var hotelInfoWindow =new google.maps.InfoWindow({
+            content: hotelContent
+        });
+        hotelMarker.addListener('click', function(){
+            hotelInfoWindow.open(map, hotelMarker);
+        });
+        var festivalMarker = new google.maps.Marker({
+            position: festivalLatLng,
+            map: map,
+        });
+        var festivalContent = '<span style="color: #0000ee; font-weight: bold;"><%= @festival.name %></span>';
+        var festivalInfoWindow =new google.maps.InfoWindow({
+            content: festivalContent
+        });
+        festivalInfoWindow.open(map, festivalMarker);
+        festivalMarker.addListener('click', function(){
+            festivalInfoWindow.open(map, festivalMarker);
+        });
+      }
+    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDwNc99Q2u5MzbjDkJp3kb1u2IH_-ofbBk&callback=initMap"
+    ></script>
+    <!--以上、Google Map-->
+  </div>
+</div>

@@ -362,7 +362,7 @@ input[type="email"] {
 }
 
 
-.festival-show-container, .hotel-index-container, .reservation-new-container {
+.festival-show-container, .hotel-index-container, .reservation-container {
   background-color: burlywood;
   border-radius: 5px;
   padding: 1% 5% 10%;
@@ -465,25 +465,57 @@ h3 i {
  margin: 2% auto;
 }
 
-.reservation-new-container {
+.reservation-container {
   padding-top: 5%;
 }
 
-.reservation-form {
+.reservation-left {
   float: left;
-  width: 50%;
+  width: 45%;
 }
 
-.reservation-form h3{
+.reservation-left.form h3{
   display: inline-block;
   margin-right: 5%;
   margin-bottom: 5%;
 }
 
-.reservation-form i {
+.reservation-left.form i {
    margin-right: 0.5%;
 }
 
 .reservation-date {
   text-align: center;
+}
+
+.reservation-detail {
+  width: 100%;
+  background-color: lightyellow;
+  border-radius: 5px;
+  font-size: 110%;
+  margin-left: 5%;
+  margin-top: 10%;
+  padding: 5% 10%;
+}
+
+.reservation-detail-section {
+  border-bottom: solid 1px #dddddd;
+  padding: 3%;
+}
+
+.reservation-detail-section i{
+  margin-right: 10%;
+}
+
+.return-top-button {
+  text-align: center;
+}
+
+.return-top-button i {
+  margin-right: 5px;
+}
+
+.return-top-button.reservation-complete {
+  margin-top: 10%;
+  margin-left: 5%;
 }

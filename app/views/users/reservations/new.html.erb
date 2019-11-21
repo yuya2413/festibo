@@ -1,7 +1,7 @@
 <div class="main clearfix">
   <h1>ホテル予約手続き</h1>
-  <div class="reservation-new-container clearfix">
-  	<div class="reservation-form">
+  <div class="reservation-container clearfix">
+  	<div class="reservation-left form">
   	<%= form_for(@reservation, url: users_user_reservations_path) do |f| %>
       <%= f.hidden_field :festival_id, :value =>  @festival.id %>
       <h3>1.部屋を選択</h3>
@@ -35,7 +35,7 @@
       </table>
       <div>
       	<h3>2.日程を選択</h3>
-      	<i class="far fa-calendar-alt"></i><%= @festival.name %><span style="margin-right:1%;">:</span><%= @festival.start_date %> ~ <%= @festival.end_date %>
+      	<i class="fas fa-thumbtack"></i><%= @festival.name %><span style="margin-right:1%;">:</span><%= @festival.start_date %> ~ <%= @festival.end_date %>
       </div>
       <div class="reservation-date">
       	<span>
@@ -88,7 +88,7 @@
             position: festivalLatLng,
             map: map,
         });
-        var festivalContent = '<span style="color: #0000ee; font-weight: bold;"><%= @festival.name %></span>';
+        var festivalContent = '<div style="color: #0000ee; font-weight: bold;"><%= @festival.name %></div><div><%= @festival.address %></div>';
         var festivalInfoWindow =new google.maps.InfoWindow({
             content: festivalContent
         });

@@ -1,5 +1,5 @@
 class RoomType < ApplicationRecord
-  belongs_to :hotel
+  belongs_to :hotel, optional: true
 
   has_many :rooms, dependent: :destroy
   accepts_nested_attributes_for :rooms, allow_destroy: true

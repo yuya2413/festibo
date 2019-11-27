@@ -5,9 +5,9 @@ class ChangeManyColumns < ActiveRecord::Migration[5.2]
   	change_column_null :users, :status, false
     change_column_default :users, :status, 0
     change_column_null :categories, :name, false
-    change_column_null :favorites, :user_id, false
-    change_column_null :favorites, :festival_id, false
-    change_column_null :favorites, :festival_id, false
+    #change_column_null :favorites, :user_id, false
+    #change_column_null :favorites, :festival_id, false
+    #change_column_null :favorites, :festival_id, false
     change_column_null :festival_photos, :festival_id, false
     change_column_null :festival_photos, :image_id, false
     change_column_null :festivals, :prefecture_id, false
@@ -31,13 +31,13 @@ class ChangeManyColumns < ActiveRecord::Migration[5.2]
     change_column_null :hotels, :name, false
     change_column_null :hotels, :location, false
     change_column_null :prefectures, :name, false
-    change_column_null :reviews, :user_id, false
-    change_column_null :reviews, :festival_id, false
-    change_column_null :reviews, :title, false
-    change_column_null :reviews, :body, false
-    change_column_null :plans, :room_type_id, false
-    change_column_null :plans, :charge, false
-    change_column_null :plans, :start_date, false
+    #change_column_null :reviews, :user_id, false
+    #change_column_null :reviews, :festival_id, false
+    #change_column_null :reviews, :title, false
+    #change_column_null :reviews, :body, false
+    #change_column_null :plans, :room_type_id, false
+    #change_column_null :plans, :charge, false
+    #change_column_null :plans, :start_date, false
     change_column_null :reservations, :user_id, false
     change_column_null :reservations, :room_id, false
     change_column_null :reservations, :plan_id, false
@@ -48,16 +48,16 @@ class ChangeManyColumns < ActiveRecord::Migration[5.2]
     change_column_null :room_types, :name, false
     change_column_null :room_types, :people_count, false
     change_column_null :rooms, :room_type_id, false
-    change_column_null :reservation_histories, :user_id, false
-    change_column_null :reservation_histories, :festival_id, false
-    change_column_null :reservation_histories, :hotel_id, false
-    change_column_null :reservation_histories, :festival_name, false
-    change_column_null :reservation_histories, :festival_location, false
-    change_column_null :reservation_histories, :hotel_name, false
-    change_column_null :reservation_histories, :hotel_location, false
-    change_column_null :reservation_histories, :room_information, false
-    change_column_null :reservation_histories, :start_date, false
-    change_column_null :reservation_histories, :end_date, false
-    change_column_null :reservation_histories, :total_charge, false
+    #change_column_null :reservation_histories, :user_id, false
+    #change_column_null :reservation_histories, :festival_id, false
+    #change_column_null :reservation_histories, :hotel_id, false
+    #change_column_null :reservation_histories, :festival_name, false
+    #change_column_null :reservation_histories, :festival_location, false
+    #change_column_null :reservation_histories, :hotel_name, false
+    #change_column_null :reservation_histories, :hotel_location, false
+    #change_column_null :reservation_histories, :room_information, false
+    #change_column_null :reservation_histories, :start_date, false
+    #change_column_null :reservation_histories, :end_date, false
+    #change_column_null :reservation_histories, :total_charge, false
   end
 end

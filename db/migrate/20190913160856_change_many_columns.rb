@@ -44,7 +44,7 @@ class ChangeManyColumns < ActiveRecord::Migration[5.2]
     add_reference :reservations, :room, foreign_key: true
     change_column_null :reservations, :user_id, false
     change_column_null :reservations, :room_id, false
-    change_column_null :reservations, :plan_id, false
+    #change_column_null :reservations, :plan_id, false
     change_column_null :reservations, :start_date, false
     change_column_null :reservations, :end_date, false
     change_column_null :reservations, :total_charge, false

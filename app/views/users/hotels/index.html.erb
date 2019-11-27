@@ -1,72 +1,86 @@
-<h1>"<%= @festival.name %>"付近のホテル一覧</h1>
-<p>会場: <%= @festival.address %></p>
-
-<!--下記、Google Map表示-->
-<h2>gmap</h2>
-latitude:<%= @festival.latitude %><br>
-longitude:<%= @festival.longitude %>
-<style>
-#map{
-  height: 400px;
-  width: 400px;
-}
-</style>
-
+<div class="main clearfix">
+  <h1>"<%= @festival.name %>"のホテル一覧</h1>
+  <div class="hotel-index-container">
+    <div class="hotel-index-map">
+      <h3><i class="fas fa-map-marked"></i>周辺MAP</h3>
+    </div>
+    <div class="hotel-index-festival-address">
+      <i class="fas fa-thumbtack"></i>開催地: <span><%= @festival.address %></span>
+    </div>
+    <!--下記、Google Map表示-->
+    <style>
+    #map{
+      height: 550px;
+      width: 90%;
+      left: 5%;
+    }
+    </style>
     <div id="map"></div>
     <script>
-    function initMap() {
-    var test ={lat: <%= @festival.latitude %>, lng: <%= @festival.longitude %>};
-    var map = new google.maps.Map(document.getElementById('map'), {
-      zoom: 15,
-      center: test
-    });
-    var transitLayer = new google.maps.TransitLayer();
-    transitLayer.setMap(map);
-
-    var contentString = "住所：<%= @festival.address %>";
-    var infowindow = new google.maps.InfoWindow({
-      content: contentString
-    });
-
-    var marker = new google.maps.Marker({
-      position:test,
-      map: map,
-      title: contentString
-    });
-
-    marker.addListener('click', function() {
-      infowindow.open(map, marker);
-    });
-    }
+      function initMap() {
+        var festivalLatLng = new google.maps.LatLng(<%= @festival.latitude %>, <%= @festival.longitude %>);
+        var map = new google.maps.Map(document.getElementById('map'), {
+          center: festivalLatLng,
+          zoom: 15,
+        });
+        var festivalMarker = new google.maps.Marker({
+            position: festivalLatLng,
+            map: map,
+          });
+        var transitLayer = new google.maps.TransitLayer();
+        transitLayer.setMap(map);
+        var festivalContent = '<div style="color: #0000ee; font-weight: bold;"><%= @festival.name %></div><div><%= @festival.address %></div>';
+        var festivalInfoWindow =new google.maps.InfoWindow({
+            content: festivalContent
+        });
+        festivalInfoWindow.open(map, festivalMarker);
+        festivalMarker.addListener('click', function(){
+            festivalInfoWindow.open(map, festivalMarker);
+        });
+        //Hotelマーカー ここから
+        <% @hotels.each do |hotel| %>
+        (function(){
+          var contentString = '<div><%= link_to hotel.name, new_users_user_reservation_path(current_user, params: {festival_id: @festival.id, hotel_id: hotel.id}), style: "color: #0000ee; font-weight: bold;" %></div><div><%= hotel.address %></div>';
+          var hotelInfoWindow =new google.maps.InfoWindow({
+            content: contentString
+          });
+          var hotelMarker = new google.maps.Marker({
+            position: {lat: <%= hotel.latitude %>, lng: <%= hotel.longitude %>},
+            map: map,
+            title: contentString
+          });
+          hotelMarker.addListener('click', function(){
+            hotelInfoWindow.open(map, hotelMarker);
+          });
+        })();
+        <% end %>
+        //Hotelマーカーここまで
+      }
     </script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDwNc99Q2u5MzbjDkJp3kb1u2IH_-ofbBk&callback=initMap"
     ></script>
-
-<table class="table table-hover">
-  <thead>
-    <tr>
-            <th>ID</th>
-            <th>ホテル名</th>
-      <th>ホテル住所</th>
-      <th>ホテル画像数</th>
-        <th>ホテル部屋タイプ数</th>
-    </tr>
-  </thead>
-  <tbody>
-      <% @hotels.each do |hotel|%>
-      <tr>
-        <th><%= hotel.id %></th>
-        <% if user_signed_in? %>
-          <td><%= link_to hotel.name, new_users_user_reservation_path(current_user, params: {festival_id: @festival.id, hotel_id: hotel.id}) %></td>
-        <% else %>
-          <td><%= hotel.name %></td>
+    <!--以上、Google Map-->
+    <div class="hotel-recommendation">
+      <h3><i class="fas fa-bed"></i>おすすめのホテル</h3>
+    </div>
+    <table class="table table-hover hotel-index-table">
+      <thead>
+        <tr>
+          <th>ホテル名</th>
+          <th>住所</th>
+          <th>宿泊プラン数</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @hotels.each do |hotel|%>
+        <tr>
+          <td style="padding-left: 2%;"><%= link_to hotel.name, new_users_user_reservation_path(current_user, params: {festival_id: @festival.id, hotel_id: hotel.id}), style: "color: #337ab7; font-weight: bold;" %></td>
+          <td style="padding-left: 2%;"><%= hotel.address %></td>
+          <td style="padding-left: 5%;"><%= hotel.room_types.count %></td>
+        </tr>
         <% end %>
-        <td><%= hotel.address %></td>
-        <td><%= hotel.hotel_photos.count %></td>
-        <td><%= hotel.room_types.count %></td>
-      </tr>
-      <% end %>
-  </tbody>
-</table>
-
+      </tbody>
+    </table>
+  </div>
+</div>
 

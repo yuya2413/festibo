@@ -1,21 +1,92 @@
-<h1>Users::Reservations#complete</h1>
-<p>ご予約ありがとうございます</p>
-
-予約ID：<%= @reservation.id %><br>
-ユーザ情報：<br>
-<%= @reservation.user.last_name %>
-<%= @reservation.user.first_name %>
-<%= @reservation.user.email %><br>
-祭り情報：<br>
-<%= @reservation.festival.name %>
-<%= @reservation.festival.address %><br>
-ホテル情報：<br>
-<%= @reservation.room.room_type.hotel.name %>
-<%= @reservation.room.room_type.hotel.address %><br>
-予約内容：<br>
-チェックイン：<%= @reservation.start_date %>
-チェックアウト：<%= @reservation.end_date %>
-=><%= (@reservation.end_date - @reservation.start_date).to_i %>泊<br>
-<%= @reservation.room.room_type.name%><br>
-一泊料金：¥<%= @reservation.room.room_type.charge %>
-合計料金：¥<%= @reservation.total_charge %>
+<div class="main clearfix">
+  <h1>ご予約ありがとうございます</h1>
+  <div class="reservation-container clearfix">
+  	<div class="reservation-left complete">
+  	  <h3>ご予約内容</h3>
+  	  <div class="reservation-detail">
+        <dl class="dl-horizontal">
+      	  <div class="reservation-detail-section">
+      	    <dt>予約ID：</dt>
+      	    <dd><%= @reservation.id %></dd>
+	      </div>
+	      <div class="reservation-detail-section">
+	        <dt><i class="fas fa-bed"></i>宿泊施設：</dt>
+	          <dd><%= @reservation.room.room_type.hotel.name %></dd>
+	        <dt>日程：</dt>
+	          <dd><%= @reservation.start_date %> ~ <%= @reservation.end_date %></dd>
+	        <dt>合計料金：</dt>
+		      <dd><%= converting_to_jpy(@reservation.total_charge) %></dd>
+	        <dt>(内訳：</dt>
+	          <dd>
+	            <%= @reservation.room.room_type.name%>
+	            <%= converting_to_jpy(@reservation.room.room_type.charge) %>/泊 ×
+	            <%= (@reservation.end_date - @reservation.start_date).to_i %>泊)</dd>
+          </div>
+          <div class="reservation-detail-section">
+	        <dt><i class="fas fa-user"></i>宿泊者名：</dt>
+		      <dd><%= @reservation.user.last_name %> <%= @reservation.user.first_name %>様</dd>
+    	      <dt>Email：</dt>
+	    	    <dd><%= @reservation.user.email %></dd>
+	      </div>
+	      <div class="reservation-detail-section">
+	        <dt><i class="fas fa-thumbtack"></i>　お祭り：</dt>
+		      <dd><%= @reservation.festival.name %></dd>
+          </div>
+        </dl>
+      </div>
+      <div class="return-top-button reservation-complete">
+      <%= link_to root_path, data: {"turbolinks" => false}, class: "btn btn-success btn-s-md", style: "width: 40%;" do %>
+        <i class="fas fa-home"></i>TOPに戻る
+      <% end %>
+      </div>
+    </div>
+    <!--下記、Google Map表示-->
+    <style>
+    #map{
+      height: 550px;
+      width: 45%;
+      float: right;
+    }
+    </style>
+    <div id="map"></div>
+    <script>
+      function initMap() {
+        var hotelLatLng = new google.maps.LatLng(<%= @reservation.room.room_type.hotel.latitude %>, <%= @reservation.room.room_type.hotel.longitude %>);
+        var festivalLatLng = new google.maps.LatLng(<%= @reservation.festival.latitude %>, <%= @reservation.festival.longitude %>);
+        var map = new google.maps.Map(document.getElementById('map'), {
+          center: hotelLatLng,
+          zoom: 15,
+        });
+        var transitLayer = new google.maps.TransitLayer();
+        transitLayer.setMap(map);
+        var hotelMarker = new google.maps.Marker({
+            position: hotelLatLng,
+            map: map,
+        });
+        var hotelContent = '<div style="color: #0000ee; font-weight: bold;"><%= @reservation.room.room_type.hotel.name %></div><div><%= @reservation.room.room_type.hotel.address %></div>';
+        var hotelInfoWindow =new google.maps.InfoWindow({
+            content: hotelContent
+        });
+        hotelInfoWindow.open(map, hotelMarker);
+        hotelMarker.addListener('click', function(){
+            hotelInfoWindow.open(map, hotelMarker);
+        });
+        var festivalMarker = new google.maps.Marker({
+            position: festivalLatLng,
+            map: map,
+        });
+        var festivalContent = '<div style="color: #0000ee; font-weight: bold;"><%= @reservation.festival.name %></div><div><%= @reservation.festival.address %></div>';
+        var festivalInfoWindow =new google.maps.InfoWindow({
+            content: festivalContent
+        });
+        festivalInfoWindow.open(map, festivalMarker);
+        festivalMarker.addListener('click', function(){
+            festivalInfoWindow.open(map, festivalMarker);
+        });
+      }
+    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDwNc99Q2u5MzbjDkJp3kb1u2IH_-ofbBk&callback=initMap"
+    ></script>
+    <!--以上、Google Map-->
+  </div>
+</div>

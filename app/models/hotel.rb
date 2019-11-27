@@ -2,6 +2,8 @@ class Hotel < ApplicationRecord
   geocoded_by :address
   after_validation :geocode, if: :address_changed?
 
+  belongs_to :prefectre, optional: true
+
   has_many :hotel_photos, dependent: :destroy
   accepts_attachments_for :hotel_photos, attachment: :image
   accepts_nested_attributes_for :hotel_photos, allow_destroy: true

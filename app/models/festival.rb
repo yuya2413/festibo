@@ -9,7 +9,7 @@ class Festival < ApplicationRecord
   accepts_nested_attributes_for :festivals_categories, allow_destroy: true
 
   has_many :festival_photos, dependent: :destroy
-  accepts_attachments_for :festival_photos, attachment: :image
+  accepts_attachments_for :festival_photos, attachment: :images
   accepts_nested_attributes_for :festival_photos, allow_destroy: true
 
   has_many :favorites, dependent: :destroy
@@ -39,7 +39,7 @@ class Festival < ApplicationRecord
   #end
 
   def start_end_check
-    errors.add(:end_date, "の日付を正しく記入してください。") unless
+    errors.add(:end_date, "の日付を正しく入力してください") unless
     self.start_date < self.end_date
   end
 

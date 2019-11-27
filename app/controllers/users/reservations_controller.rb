@@ -13,30 +13,36 @@ class Users::ReservationsController < ApplicationController
     @reservation = Reservation.new
     @hotel = Hotel.find(params[:hotel_id])
     @festival = Festival.find(params[:festival_id])
-    #下記、空室検索、時間がないため今回は見送り
-    #if params[:start_date].present? && params[:end_date].present?
-    #  start_date = Date.parse(params[:start_date])
-    #  end_date = Date.parse(params[:end_date])
-    #  @reservationは入力したstart,end_dateに重複する他の予約として定義
-    #  @rooms = Room.joins(:reservation).where.not('start_date <= ? or end_date >= ?', :start_date, :end_date)
-    #end
   end
-
 
 
   def create
     @reservation = Reservation.new(reservation_params)
-    if @reservation.end_date <= @reservation.start_date
+    #部屋を選択していない場合のエラーの解決方法不明
+    #よって下記コメントアウト、途中経過
+    #if @reservation.room_id.nil?
+    #  flash[:danger] = '部屋が選択されていません'
+    #  redirect_to new_users_user_reservation_path(current_user, params: {festival_id: @festival.id, hotel_id: hotel.id}) and return
+    #end
+    #以上
+    if @reservation.end_date.nil? or @reservation.start_date.nil?
+      @festival = Festival.find(@reservation.festival_id)
+      @room_type = RoomType.joins(:rooms).where(rooms: {id: @reservation.room_id}).first
+      @hotel = Hotel.find(@room_type.hotel_id)
+      flash[:danger] = '日付が空欄です'
+      render 'new'
+    elsif @reservation.end_date <= @reservation.start_date
       @festival = Festival.find(@reservation.festival_id)
       @room_type = RoomType.joins(:rooms).where(rooms: {id: @reservation.room_id}).first
       @hotel = Hotel.find(@room_type.hotel_id)
       flash[:danger] = '正しい日付を入力してください'
       render 'new'
+
     elsif Reservation.where(room_id: @reservation.room_id).where('end_date > ? and start_date < ?', @reservation.start_date, @reservation.end_date).exists?
       @festival = Festival.find(@reservation.festival_id)
       @room_type = RoomType.joins(:rooms).where(rooms: {id: @reservation.room_id}).first
       @hotel = Hotel.find(@room_type.hotel_id)
-      flash[:danger] = 'すでに予約が埋まっています'
+      flash[:danger] = 'こちらはすでに埋まっています(部屋：' + @reservation.room.name + ', 日程：' + @reservation.start_date.to_s + '~' + @reservation.end_date.to_s + ')'
       render 'new'
     else
       nights = (@reservation.end_date - @reservation.start_date).to_i

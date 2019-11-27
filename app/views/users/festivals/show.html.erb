@@ -1,84 +1,87 @@
-<h1><%= @festival.name %></h1>
-<%= render 'search_form' %>
-<%= link_to "近くのホテルをチェック", users_hotels_path(@festival) %>
-<table class="table table-hover">
-	<thead>
-		<tr>
-            <th>祭り名</th>
-			<th>祭り説明</th>
-			<th>祭り開催地</th>
-			<th>開催初日</th>
-			<th>開催終了日</th>
-			<th>value1</th>
-			<th>value2</th>
-			<th>value3</th>
-			<th>value4</th>
-			<th>value5</th>
-		</tr>
-	</thead>
-	<tbody>
-        <tr>
-			<td><%= @festival.name %></td>
-			<td><%= @festival.detail %></td>
-			<td><%= @festival.address %></td>
-			<td><%= @festival.start_date %></td>
-			<td><%= @festival.end_date %></td>
-			<td><%= @festival.value_1 %></td>
-			<td><%= @festival.value_2 %></td>
-			<td><%= @festival.value_3 %></td>
-			<td><%= @festival.value_4 %></td>
-			<td><%= @festival.value_5 %></td>
-			<td><%= @festival.prefecture.name %></td>
-			<td>
-				<% @festival.festivals_categories.each do |festivals_category| %>
-				<%= festivals_category.category.name %>
-				<% end %>
-			</td>
-		</tr>
-		<tr>
-			<% @festival.festival_photos.each do |festival_photo|%>
-			<td><%= attachment_image_tag festival_photo, :image, style: "width: 100px; height: 100px;" %></td>
-			<% end %>
-		</tr>
-	</tbody>
-</table>
-<!--下記、Google Map表示-->
-<h2>gmap</h2>
-latitude:<%= @festival.latitude %><br>
-longitude:<%= @festival.longitude %>
-<style>
-#map{
-  height: 400px;
-  width: 400px;
-}
-</style>
+<div class="main clearfix">
+  <h1 class="festival-show-page-name">"<%= @festival.name %>"の詳細</h1>
+  <%= render 'search_form' %>
+  <div class="main-right">
+    <div class="festival-show-container">
+  	  <div class="festival-name show-page"><%= @festival.name %></div>
+  	  <div class="festival-show-elements">
+  	    <span class="festival-period">
+    	  <i class="far fa-calendar-alt"></i>
+	  	  <span class="festival-period-date"><%= @festival.start_date %></span>
+	  	  <span> ~  </span>
+	  	  <span class="festival-period-date"><%= @festival.end_date %></span>
+	  	</span>
+	  	<span class="festival-prefecture show-page">
+	  	  <i class="fas fa-thumbtack"></i>
+	  	  <%= @festival.prefecture.name %>
+	  	</span>
+	  	<span class="festival-categories">
+	  	  <i class="fas fa-tags"></i>
+	  	  <% @festival.festivals_categories.each do |festivals_category| %>
+	  	  <span class="festival-categories-each show-page"><%= festivals_category.category.name %></span>
+		  <% end %>
+		  </span>
+	    </div>
+  	  <div class="festival-show-container-image">
+  	  	<% if @festival.festival_photos.present? %>
+  	      <% @festival.festival_photos.each do |festival_photo|%>
+		        <%= attachment_image_tag festival_photo, :image, class: "festival-show-image" %>
+	        <% end %>
+        <% else %>
+          <%= image_tag "no_image.png", class: "festival-show-image" %>
+	      <% end %>
+	    </div>
+	    <div class="festival-detail show-page">
+	  	  <h3><i class="far fa-file-alt"></i>説明</h3>
+	  	  <div class="festival-detail-text"><%= @festival.detail %></div>
+	    </div>
+	    <div class="festival-address">
+	  	  <h3><i class="fas fa-map-marker-alt"></i>開催地</h3>
+	  	  <div class="festival-address-detail">
+	  	    <span class="festival-address-text"><%= @festival.address %></span>
+  	  	  <%= link_to users_hotels_path(@festival) do %>
+	    	  <button class="btn btn-primary show-page">
+	      		<i class="fas fa-check"></i>近くのホテルをチェック
+	        </button>
+	  	    <% end %>
+	  	  </div>
+	      <!-- 下記、Google Map表示 -->
+        <style>
+          #map{
+          	height: 400px;
+          	width: 80%;
+          	left: 10%;
+          }
+        </style>
+        <div id="map"></div>
+        <script>
+          function initMap() {
+          var test ={lat: <%= @festival.latitude %>, lng: <%= @festival.longitude %>};
+          var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 15,
+            center: test
+          });
+          var transitLayer = new google.maps.TransitLayer();
+          transitLayer.setMap(map);
+          var contentString = "住所：<%= @festival.address %>";
+          var infowindow = new google.maps.InfoWindow({
+            content: contentString
+          });
 
-    <div id="map"></div>
-    <script>
-    function initMap() {
-    var test ={lat: <%= @festival.latitude %>, lng: <%= @festival.longitude %>};
-    var map = new google.maps.Map(document.getElementById('map'), {
-      zoom: 15,
-      center: test
-    });
-    var transitLayer = new google.maps.TransitLayer();
-    transitLayer.setMap(map);
-
-    var contentString = "住所：<%= @festival.address %>";
-    var infowindow = new google.maps.InfoWindow({
-      content: contentString
-    });
-
-    var marker = new google.maps.Marker({
-      position:test,
-      map: map,
-      title: contentString
-    });
-
-    marker.addListener('click', function() {
-      infowindow.open(map, marker);
-    });
-    }
-    </script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDwNc99Q2u5MzbjDkJp3kb1u2IH_-ofbBk&callback=initMap"
-    ></script>
+          var marker = new google.maps.Marker({
+            position:test,
+            map: map,
+            title: contentString
+          });
+          marker.addListener('click', function() {
+            infowindow.open(map, marker);
+          });
+          }
+        </script>
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDwNc99Q2u5MzbjDkJp3kb1u2IH_-ofbBk&callback=initMap">
+        </script>
+        <!-- 以上 -->
+      </div>
+    </div>
+  </div>
+</div>

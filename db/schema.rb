@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_22_043844) do
+ActiveRecord::Schema.define(version: 2019_11_11_040542) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -121,6 +121,8 @@ ActiveRecord::Schema.define(version: 2019_09_22_043844) do
     t.datetime "updated_at", null: false
     t.float "latitude"
     t.float "longitude"
+    t.integer "prefecture_id"
+    t.index ["prefecture_id"], name: "index_hotels_on_prefecture_id"
   end
 
   create_table "maps", force: :cascade do |t|

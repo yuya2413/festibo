@@ -11,14 +11,17 @@ class Users::SessionsController < Devise::SessionsController
   # POST /resource/sign_in
    def create
     user = User.find_by(email: params[:user][:email])
-    if user.status == "退会済み"
+    if user == nil
+      super
+    elsif user.status == "退会済み"
       flash[:danger] = "退会済みアカウントです"
       redirect_to root_path and return
     elsif user.status == "強制退会"
       flash[:danger] = "強制退会済みアカウントです"
       redirect_to root_path and return
+    else
+      super
     end
-    super
    end
 
 

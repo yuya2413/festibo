@@ -1,8 +1,13 @@
-<%= form_tag(users_festivals_path, :method => 'get') do %>
-	<!--options_from_collection_for_select
+<div class="main-left-search-bar">
+  <p>祭りを探す</p>
+  <%= form_tag(users_festivals_path, :method => 'get') do %>
+  <!--options_from_collection_for_select
 		第１引数は表示させるデータ、第２引数は格納される値、第３引数はViewに表示される値-->
-	<%= date_field_tag 'start_date', include_blank: "開催日", class:"btn btn-default dropdown-toggle"%>
-    <%= select_tag 'prefecture_id', options_from_collection_for_select( Prefecture.all, :id, :name), include_blank: "都道府県", class:"btn btn-default dropdown-toggle" %>
-    <%= select_tag 'category_id', options_from_collection_for_select( Category.all, :id, :name), include_blank: "カテゴリー", class:"btn btn-default dropdown-toggle" %>
-    <%= submit_tag 'Search', :name => nil %>
-<% end %>
+  <div class="festival-date-input" data-text="指定した日付の前後1週間を検索">
+    <%= date_field_tag 'start_date', include_blank: "開催日" %>
+  </div>
+  <%= select_tag 'prefecture_id', options_from_collection_for_select( Prefecture.all, :id, :name), include_blank: "都道府県", class:"btn btn-default dropdown-toggle", style: "width: 160px; height: 34px; padding: 6px 12px;" %>
+  <%= select_tag 'category_id', options_from_collection_for_select( Category.all, :id, :name), include_blank: "カテゴリー", class:"btn btn-default dropdown-toggle", style: "width: 160px; height: 34px; padding: 6px 12px;" %>
+  <%= button_tag 'Search <span class="glyphicon glyphicon-search"  aria-hidden="true"></span>'.html_safe, :type => "submit", :class =>"btn btn-success btn-s-md", style: "width: 160px; margin: 15px auto;" %>
+  <% end %>
+</div>

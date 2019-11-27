@@ -8,8 +8,10 @@ class ChangeManyColumns < ActiveRecord::Migration[5.2]
     #change_column_null :favorites, :user_id, false
     #change_column_null :favorites, :festival_id, false
     #change_column_null :favorites, :festival_id, false
+    add_reference :festival_photos, :festival, foreign_key: true
     change_column_null :festival_photos, :festival_id, false
     change_column_null :festival_photos, :image_id, false
+    add_reference :festivals, :prefecture, foreign_key: true
     change_column_null :festivals, :prefecture_id, false
     change_column_null :festivals, :category_id, false
     change_column_null :festivals, :name, false
@@ -26,6 +28,7 @@ class ChangeManyColumns < ActiveRecord::Migration[5.2]
     change_column_default :festivals, :value_3, 2
     change_column_default :festivals, :value_4, 2
     change_column_default :festivals, :value_5, 2
+    add_reference :hotel_photos, :hotel, foreign_key: true
     change_column_null :hotel_photos, :hotel_id, false
     change_column_null :hotel_photos, :image_id, false
     change_column_null :hotels, :name, false
@@ -38,6 +41,7 @@ class ChangeManyColumns < ActiveRecord::Migration[5.2]
     #change_column_null :plans, :room_type_id, false
     #change_column_null :plans, :charge, false
     #change_column_null :plans, :start_date, false
+    add_reference :reservations, :room, foreign_key: true
     change_column_null :reservations, :user_id, false
     change_column_null :reservations, :room_id, false
     change_column_null :reservations, :plan_id, false

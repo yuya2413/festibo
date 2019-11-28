@@ -1,33 +1,27 @@
-# FesTibo(testtest)
+# FesTibo
 
 このサイトは日本各地の祭りを元に、ホテル等を検索できる宿泊施設予約サイトです。  
-目次は下記になります。
 
+## URL  
+https://festibo.herokuapp.com/users/sign_in  
 
+### 注意  
+- このサイトはポートフォリオ用に制作したものであり、実際の施設予約はできません。  
+- サンプルデータはデモ用に用意したものであり、実在の人物や団体などとは関係ありません。  
 
-## Dependency
-### Usage(使い方)
-#### Demo
-##### URL
-## Requirements
-## 制作過程
-### ローカル仮想環境の構築(Set UP?)
+## Dependency  
+ruby 2.5.5p157
+Rails 5.2.3
 
+## 使い方  
+上記URLをクリックしてログイン画面にアクセス  
+ログイン(メアドとパスワード)  
+トップページで日付と都道府県とカテゴリーで検索(とりあえずカテゴリーのダイナミックで)  
+ねぶた祭りか竿燈祭りか札幌雪まつりをクリック  
+近くのホテルをチェックをクリック  
+いずれかのホテルをクリック  
+部屋番号と日程を選択して予約するをクリック  
+予約完了  
 
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
+## Note  
 

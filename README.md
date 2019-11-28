@@ -1,9 +1,22 @@
-# README
+# FesTibo(testtest)
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+このサイトは日本各地の祭りを元に、ホテル等を検索できる宿泊施設予約サイトです。
+目次は下記になります。
 
-Things you may want to cover:
+
+
+## Dependency
+### Usage(使い方)
+#### Demo
+* URL
+
+
+* Requirements
+*制作過程
+ローカル仮想環境の構築(Set UP?)
+ 
+
+
 
 * Ruby version
 

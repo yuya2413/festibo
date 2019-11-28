@@ -37,6 +37,13 @@ end
 #		)
 #end
 
+# Prefectureを生成
+47.times do |n|
+	Prefecture.create!(
+		name: n+=1
+		)
+end
+
 # Festivalを生成
 # id=1, 青森ねぶた祭り
 Festival.create(
@@ -428,12 +435,7 @@ Hotel.create!(
 		)
 end
 
-# Prefectureを生成
-47.times do |n|
-	Prefecture.create!(
-		name: n+=1
-		)
-end
+
 
 
 # Roomを生成

@@ -1,4 +1,7 @@
+![FesTibo](app/assets/images/logo.png)
+  
 # FesTibo
+
 
 このサイトは日本各地の祭りを元に、ホテル等を検索できる宿泊施設予約サイトです。  
 https://festibo.herokuapp.com/users/sign_in  

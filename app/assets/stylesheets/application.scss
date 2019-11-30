@@ -158,23 +158,32 @@ h1 {
   margin-bottom: 50px;
 }
 
+.about-content-right {
+  width: 40%;
+  float: right;
+  text-align: right;
+}
+
 .about-content-left {
-  width: 50%;
+  width: 60%;
   float: left;
   font-size: 14px;
 }
 
-.how-to-use {
-  font-weight: bold;
-}
-.how-to-use p {
-  text-decoration: underline solid gray;
+.about-content-left h4{
+  text-decoration: underline;
 }
 
-.about-content-right {
-  width: 50%;
-  float: right;
-  text-align: right;
+.about-content-left ol div {
+  font-style: italic;
+}
+
+.introduction-content {
+  font-style: italic;
+  background-color: lightgray;
+  border-radius: 4px;
+  margin: 3% 5% 15%;
+  padding: 6% 6% 15%;
 }
 
 .sign-background {
